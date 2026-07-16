@@ -1,0 +1,514 @@
+/* GISTEC — tema claro, simples e sofisticado */
+
+:root {
+    --white: #ffffff;
+    --black: #111111;
+    --gray-900: #202020;
+    --gray-700: #555555;
+    --gray-500: #7a7a7a;
+    --gray-300: #d8d8d8;
+    --gray-200: #e8e8e8;
+    --gray-100: #f5f5f3;
+    --max-width: 1160px;
+    --header-height: 82px;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    background: var(--white);
+    color: var(--black);
+    font-family: Arial, Helvetica, sans-serif;
+    line-height: 1.6;
+}
+
+body.menu-open {
+    overflow: hidden;
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+img {
+    max-width: 100%;
+    display: block;
+}
+
+.container {
+    width: min(var(--max-width), 92%);
+    margin: 0 auto;
+}
+
+/* Cabeçalho */
+
+.site-header {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    background: rgba(255, 255, 255, 0.96);
+    border-bottom: 1px solid var(--gray-200);
+    backdrop-filter: blur(12px);
+}
+
+.header-content {
+    min-height: var(--header-height);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 32px;
+}
+
+.brand {
+    display: inline-flex;
+    align-items: center;
+    gap: 14px;
+}
+
+.brand-logo {
+    width: 54px;
+    height: 54px;
+    object-fit: contain;
+    flex: 0 0 auto;
+}
+
+.brand-copy strong {
+    display: block;
+    font-size: 18px;
+    letter-spacing: 0.08em;
+}
+
+.brand-copy span {
+    display: block;
+    color: var(--gray-700);
+    font-size: 11px;
+}
+
+.main-menu {
+    display: flex;
+    align-items: center;
+    gap: 25px;
+}
+
+.main-menu a {
+    padding: 29px 0 25px;
+    border-bottom: 2px solid transparent;
+    color: var(--gray-900);
+    font-size: 13px;
+    transition: 160ms ease;
+}
+
+.main-menu a:hover,
+.main-menu a.active {
+    border-bottom-color: var(--black);
+}
+
+.menu-button {
+    display: none;
+    border: 1px solid var(--gray-300);
+    background: var(--white);
+    color: var(--black);
+    border-radius: 6px;
+    padding: 9px 12px;
+    cursor: pointer;
+}
+
+/* Hero */
+
+.hero {
+    padding: 86px 0 78px;
+    border-bottom: 1px solid var(--gray-200);
+}
+
+.hero-grid {
+    display: grid;
+    grid-template-columns: 1.25fr 0.75fr;
+    gap: 70px;
+    align-items: center;
+}
+
+.section-label {
+    margin-bottom: 14px;
+    color: var(--gray-700);
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+}
+
+.hero h1 {
+    max-width: 800px;
+    margin-bottom: 24px;
+    font-size: clamp(50px, 7vw, 88px);
+    font-weight: 500;
+    line-height: 1.02;
+    letter-spacing: -0.04em;
+}
+
+.hero-text {
+    max-width: 720px;
+    margin-bottom: 32px;
+    color: var(--gray-700);
+    font-size: 18px;
+}
+
+.hero-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+
+.button {
+    min-height: 48px;
+    padding: 0 21px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid var(--black);
+    border-radius: 4px;
+    font-size: 13px;
+    font-weight: 700;
+    transition: 160ms ease;
+}
+
+.button-dark {
+    background: var(--black);
+    color: var(--white);
+}
+
+.button-light {
+    background: var(--white);
+    color: var(--black);
+}
+
+.button:hover {
+    transform: translateY(-2px);
+}
+
+.hero-logo-panel {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.hero-logo-panel img {
+    width: min(330px, 100%);
+    height: auto;
+}
+
+/* Faixa introdutória */
+
+.intro-strip {
+    border-bottom: 1px solid var(--gray-200);
+}
+
+.intro-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+}
+
+.intro-grid > div {
+    min-height: 118px;
+    padding: 26px 28px;
+    border-right: 1px solid var(--gray-200);
+}
+
+.intro-grid > div:first-child {
+    border-left: 1px solid var(--gray-200);
+}
+
+.intro-grid strong,
+.intro-grid span {
+    display: block;
+}
+
+.intro-grid strong {
+    margin-bottom: 5px;
+    font-size: 14px;
+}
+
+.intro-grid span {
+    color: var(--gray-700);
+    font-size: 13px;
+}
+
+/* Seções */
+
+.section {
+    padding: 92px 0;
+}
+
+.section-soft {
+    background: var(--gray-100);
+}
+
+.section-heading {
+    margin-bottom: 38px;
+    display: grid;
+    grid-template-columns: 0.8fr 1fr;
+    gap: 50px;
+    align-items: end;
+}
+
+.section-heading h2 {
+    font-size: clamp(36px, 5vw, 58px);
+    font-weight: 500;
+    line-height: 1.05;
+    letter-spacing: -0.03em;
+}
+
+.section-heading > p {
+    color: var(--gray-700);
+    max-width: 670px;
+}
+
+/* Cards */
+
+.cards-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    border-top: 1px solid var(--gray-300);
+    border-left: 1px solid var(--gray-300);
+}
+
+.card {
+    min-height: 280px;
+    padding: 30px;
+    border-right: 1px solid var(--gray-300);
+    border-bottom: 1px solid var(--gray-300);
+    background: var(--white);
+}
+
+.card-number {
+    display: block;
+    margin-bottom: 55px;
+    color: var(--gray-500);
+    font-size: 12px;
+}
+
+.card h3 {
+    margin-bottom: 12px;
+    font-size: 22px;
+    font-weight: 500;
+}
+
+.card p {
+    margin-bottom: 24px;
+    color: var(--gray-700);
+}
+
+.card-status {
+    color: var(--gray-500);
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.07em;
+}
+
+/* Mapa */
+
+.map-placeholder {
+    min-height: 440px;
+    display: grid;
+    place-items: center;
+    padding: 30px;
+    border: 1px solid var(--gray-300);
+    background:
+        linear-gradient(var(--gray-200) 1px, transparent 1px),
+        linear-gradient(90deg, var(--gray-200) 1px, transparent 1px),
+        var(--white);
+    background-size: 46px 46px;
+}
+
+.map-placeholder-content {
+    max-width: 560px;
+    padding: 34px;
+    border: 1px solid var(--gray-300);
+    background: rgba(255, 255, 255, 0.94);
+    text-align: center;
+}
+
+.map-placeholder-content span {
+    display: block;
+    margin-bottom: 12px;
+    color: var(--gray-500);
+    font-size: 12px;
+    letter-spacing: 0.10em;
+    text-transform: uppercase;
+}
+
+.map-placeholder-content h3 {
+    margin-bottom: 12px;
+    font-size: 27px;
+    font-weight: 500;
+}
+
+.map-placeholder-content p {
+    color: var(--gray-700);
+}
+
+/* Estados vazios */
+
+.empty-state {
+    padding: 34px;
+    border-top: 1px solid var(--gray-300);
+    border-bottom: 1px solid var(--gray-300);
+}
+
+.empty-state strong {
+    display: block;
+    margin-bottom: 7px;
+    font-size: 20px;
+    font-weight: 500;
+}
+
+.empty-state p {
+    color: var(--gray-700);
+}
+
+/* Rodapé */
+
+.site-footer {
+    padding: 50px 0;
+    border-top: 1px solid var(--gray-300);
+}
+
+.footer-grid {
+    display: grid;
+    grid-template-columns: 1.3fr 1fr 1fr;
+    gap: 36px;
+    color: var(--gray-700);
+    font-size: 13px;
+}
+
+.footer-grid strong {
+    display: block;
+    margin-bottom: 7px;
+    color: var(--black);
+}
+
+.footer-brand {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+}
+
+.footer-brand img {
+    width: 60px;
+    height: 60px;
+    object-fit: contain;
+}
+
+.footer-brand span {
+    display: block;
+}
+
+/* Responsividade */
+
+@media (max-width: 930px) {
+    .menu-button {
+        display: block;
+    }
+
+    .main-menu {
+        position: fixed;
+        top: var(--header-height);
+        left: 0;
+        right: 0;
+        display: none;
+        flex-direction: column;
+        align-items: stretch;
+        gap: 0;
+        padding: 12px 4% 24px;
+        border-bottom: 1px solid var(--gray-200);
+        background: var(--white);
+    }
+
+    .main-menu.open {
+        display: flex;
+    }
+
+    .main-menu a {
+        padding: 13px 0;
+    }
+
+    .hero-grid {
+        grid-template-columns: 1fr;
+        gap: 45px;
+    }
+
+    .hero-logo-panel {
+        justify-content: flex-start;
+    }
+
+    .hero-logo-panel img {
+        width: 230px;
+    }
+
+    .section-heading {
+        grid-template-columns: 1fr;
+        gap: 14px;
+    }
+
+    .cards-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .intro-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .intro-grid > div,
+    .intro-grid > div:first-child {
+        border-left: 1px solid var(--gray-200);
+        border-right: 1px solid var(--gray-200);
+        border-bottom: 1px solid var(--gray-200);
+    }
+
+    .footer-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 620px) {
+    .brand-copy span {
+        display: none;
+    }
+
+    .brand-logo {
+        width: 47px;
+        height: 47px;
+    }
+
+    .hero {
+        padding-top: 64px;
+    }
+
+    .hero h1 {
+        font-size: clamp(45px, 14vw, 66px);
+    }
+
+    .hero-text {
+        font-size: 16px;
+    }
+
+    .section {
+        padding: 68px 0;
+    }
+
+    .map-placeholder {
+        min-height: 380px;
+    }
+
+    .map-placeholder-content {
+        padding: 25px;
+    }
+}

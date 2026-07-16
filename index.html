@@ -2,89 +2,270 @@
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
-    <title>GISTEC</title>
-
-    <style>
-
-        body{
-            margin:0;
-            font-family:Arial, Helvetica, sans-serif;
-            background:#f5f5f5;
-        }
-
-        header{
-
-            background:#0b4f8a;
-            color:white;
-            padding:40px;
-
-            text-align:center;
-
-        }
-
-        h1{
-
-            margin:0;
-            font-size:48px;
-
-        }
-
-        h2{
-
-            font-weight:normal;
-
-        }
-
-        section{
-
-            width:900px;
-
-            margin:auto;
-
-            margin-top:40px;
-
-            background:white;
-
-            padding:30px;
-
-            border-radius:10px;
-
-            box-shadow:0px 0px 15px rgba(0,0,0,.15);
-
-        }
-
-    </style>
-
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="GISTEC — Geoinformação, Território e Conservação">
+    <title>GISTEC | Geoinformação, Território e Conservação</title>
+    <link rel="stylesheet" href="css/style.css">
 </head>
 
 <body>
+    <header class="site-header">
+        <div class="container header-content">
+            <a class="brand" href="#inicio" aria-label="Página inicial do GISTEC">
+                <img src="imagens/logo.png" alt="Logo GISTEC" class="brand-logo">
+                <div class="brand-copy">
+                    <strong>GISTEC</strong>
+                    <span>Geoinformação, Território e Conservação</span>
+                </div>
+            </a>
 
-<header>
+            <button class="menu-button" id="menuButton" type="button"
+                    aria-label="Abrir menu" aria-expanded="false">
+                Menu
+            </button>
 
-<h1>Grupo de Pesquisa - GISTEC</h1>
+            <nav class="main-menu" id="mainMenu" aria-label="Navegação principal">
+                <a href="#inicio">Início</a>
+                <a href="#projetos">Projetos</a>
+                <a href="#mapas">Mapas</a>
+                <a href="#dados">Dados</a>
+                <a href="#publicacoes">Publicações</a>
+                <a href="#cursos">Cursos</a>
+                <a href="#equipe">Equipe</a>
+            </nav>
+        </div>
+    </header>
 
-<h2>Geoinformação, Território e Conservação - UFU</h2>
+    <main>
+        <section class="hero" id="inicio">
+            <div class="container hero-grid">
+                <div class="hero-content">
+                    <p class="section-label">Grupo de pesquisa</p>
+                    <h1>Geoinformação, Território e Conservação.</h1>
+                    <p class="hero-text">
+                        O GISTEC reúne pesquisa, ensino e extensão em geoinformação,
+                        sensoriamento remoto, sistemas de informações geográficas,
+                        conservação ambiental e análise territorial.
+                    </p>
 
-</header>
+                    <div class="hero-actions">
+                        <a class="button button-dark" href="#projetos">Conhecer projetos</a>
+                        <a class="button button-light" href="#mapas">Explorar mapas</a>
+                    </div>
+                </div>
 
-<section>
+                <div class="hero-logo-panel">
+                    <img src="imagens/logo.png" alt="Identidade visual do GISTEC">
+                </div>
+            </div>
+        </section>
 
-<h2>Bem-vindo</h2>
+        <section class="intro-strip">
+            <div class="container intro-grid">
+                <div>
+                    <strong>Universidade Federal de Uberlândia</strong>
+                    <span>Instituto de Geografia</span>
+                </div>
+                <div>
+                    <strong>Áreas de atuação</strong>
+                    <span>SIG, sensoriamento remoto, território e conservação</span>
+                </div>
+                <div>
+                    <strong>Portal em desenvolvimento</strong>
+                    <span>Conteúdos serão adicionados gradualmente</span>
+                </div>
+            </div>
+        </section>
 
-<p>
+        <section class="section" id="projetos">
+            <div class="container">
+                <div class="section-heading">
+                    <div>
+                        <p class="section-label">Pesquisa</p>
+                        <h2>Projetos</h2>
+                    </div>
+                    <p>
+                        Área destinada aos projetos de pesquisa, extensão,
+                        inovação e formação desenvolvidos pelo grupo.
+                    </p>
+                </div>
 
-Este é o portal oficial do LABGISTEC.
+                <div class="cards-grid">
+                    <article class="card">
+                        <span class="card-number">01</span>
+                        <h3>Incêndios e território</h3>
+                        <p>
+                            Estudos sobre causas, padrões espaciais, recorrência,
+                            severidade e consequências socioambientais dos incêndios.
+                        </p>
+                        <span class="card-status">Conteúdo em preparação</span>
+                    </article>
 
-</p>
+                    <article class="card">
+                        <span class="card-number">02</span>
+                        <h3>Geoinformação ambiental</h3>
+                        <p>
+                            Integração de bases geoespaciais, análise espacial
+                            e desenvolvimento de produtos para planejamento territorial.
+                        </p>
+                        <span class="card-status">Conteúdo em preparação</span>
+                    </article>
 
-<p>
+                    <article class="card">
+                        <span class="card-number">03</span>
+                        <h3>Sensoriamento remoto</h3>
+                        <p>
+                            Uso de imagens orbitais, índices espectrais e séries
+                            temporais para monitoramento ambiental.
+                        </p>
+                        <span class="card-status">Conteúdo em preparação</span>
+                    </article>
+                </div>
+            </div>
+        </section>
 
-O portal está em desenvolvimento.
+        <section class="section section-soft" id="mapas">
+            <div class="container">
+                <div class="section-heading">
+                    <div>
+                        <p class="section-label">Cartografia digital</p>
+                        <h2>Mapas</h2>
+                    </div>
+                    <p>
+                        Espaço preparado para mapas interativos, produtos
+                        cartográficos e visualizações geoespaciais.
+                    </p>
+                </div>
 
-</p>
+                <div class="map-placeholder">
+                    <div class="map-placeholder-content">
+                        <span>Mapa interativo</span>
+                        <h3>Esta área receberá os mapas do GISTEC.</h3>
+                        <p>
+                            Posteriormente, poderão ser integradas camadas GeoJSON,
+                            Leaflet, serviços web e dados do PostGIS.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
 
-</section>
+        <section class="section" id="dados">
+            <div class="container">
+                <div class="section-heading">
+                    <div>
+                        <p class="section-label">Ciência aberta</p>
+                        <h2>Dados</h2>
+                    </div>
+                    <p>
+                        Bases geoespaciais, metadados, documentação,
+                        scripts e arquivos para download.
+                    </p>
+                </div>
 
+                <div class="empty-state">
+                    <strong>Nenhum conjunto de dados publicado ainda.</strong>
+                    <p>
+                        Esta seção poderá receber GeoPackage, GeoJSON, CSV,
+                        serviços OGC e dicionários de dados.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <section class="section section-soft" id="publicacoes">
+            <div class="container">
+                <div class="section-heading">
+                    <div>
+                        <p class="section-label">Produção científica</p>
+                        <h2>Publicações</h2>
+                    </div>
+                    <p>
+                        Artigos, livros, capítulos, relatórios técnicos
+                        e demais produtos acadêmicos.
+                    </p>
+                </div>
+
+                <div class="empty-state">
+                    <strong>Publicações serão adicionadas posteriormente.</strong>
+                    <p>
+                        A estrutura está pronta para referências, DOI,
+                        resumos e links externos.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <section class="section" id="cursos">
+            <div class="container">
+                <div class="section-heading">
+                    <div>
+                        <p class="section-label">Ensino e extensão</p>
+                        <h2>Cursos</h2>
+                    </div>
+                    <p>
+                        Cursos, oficinas, materiais didáticos
+                        e atividades de capacitação.
+                    </p>
+                </div>
+
+                <div class="empty-state">
+                    <strong>Programação ainda não cadastrada.</strong>
+                    <p>
+                        Este espaço poderá reunir inscrições,
+                        cronogramas, materiais e certificados.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <section class="section section-soft" id="equipe">
+            <div class="container">
+                <div class="section-heading">
+                    <div>
+                        <p class="section-label">Pessoas</p>
+                        <h2>Equipe</h2>
+                    </div>
+                    <p>
+                        Docentes, estudantes, técnicos,
+                        colaboradores e instituições parceiras.
+                    </p>
+                </div>
+
+                <div class="empty-state">
+                    <strong>Equipe em construção.</strong>
+                    <p>
+                        Os perfis dos integrantes serão cadastrados futuramente.
+                    </p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <div class="container footer-grid">
+            <div class="footer-brand">
+                <img src="imagens/logo.png" alt="Logo GISTEC">
+                <div>
+                    <strong>GISTEC</strong>
+                    <span>Geoinformação, Território e Conservação</span>
+                </div>
+            </div>
+
+            <div>
+                <strong>Instituição</strong>
+                <p>Universidade Federal de Uberlândia</p>
+                <p>Instituto de Geografia</p>
+            </div>
+
+            <div>
+                <strong>Portal</strong>
+                <p>Versão inicial em desenvolvimento</p>
+                <p id="currentYear"></p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
 </body>
-
 </html>
