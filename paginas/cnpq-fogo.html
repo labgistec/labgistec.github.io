@@ -9,7 +9,117 @@
           content="Mapa interativo e informações sobre o Projeto CNPq Fogo.">
 
     <link rel="stylesheet" href="../css/style.css">
+/* Ajuste do título e das informações */
 
+.project-heading h1 {
+    font-size: clamp(2rem, 2.8vw, 3.2rem) !important;
+    line-height: 1.12 !important;
+    letter-spacing: -0.025em;
+}
+
+.project-details h2 {
+    font-size: 1.35rem;
+}
+
+.project-details dt {
+    font-size: 0.72rem;
+}
+
+.project-details dd {
+    font-size: 0.95rem;
+}
+
+/* Equipe */
+
+.project-team {
+    margin: 0 0 70px;
+}
+
+.project-team-header {
+    margin-bottom: 30px;
+}
+
+.project-team-header h2 {
+    margin: 8px 0 0;
+    font-size: 2rem;
+    font-weight: 500;
+}
+
+.team-coordinator {
+    margin-bottom: 40px;
+    padding: 28px;
+    background: #111111;
+    color: #ffffff;
+}
+
+.team-coordinator span,
+.team-card span {
+    display: block;
+    margin-bottom: 10px;
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+}
+
+.team-coordinator h3 {
+    margin: 0 0 8px;
+    font-size: 1.6rem;
+    font-weight: 500;
+}
+
+.team-coordinator p {
+    margin: 4px 0;
+    color: #dddddd;
+}
+
+.team-group {
+    margin-top: 38px;
+}
+
+.team-group > h3 {
+    margin-bottom: 18px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #cccccc;
+    font-size: 1.2rem;
+}
+
+.team-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+}
+
+.team-card {
+    padding: 22px;
+    background: #f4f4f2;
+    border-top: 2px solid #222222;
+}
+
+.team-card h4 {
+    margin: 0 0 10px;
+    font-size: 1.05rem;
+    font-weight: 600;
+}
+
+.team-card p {
+    margin: 3px 0;
+    color: #555555;
+    font-size: 0.9rem;
+    line-height: 1.5;
+}
+
+@media (max-width: 900px) {
+    .team-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 600px) {
+    .team-grid {
+        grid-template-columns: 1fr;
+    }
+}
     <style>
         .project-page {
             padding: 70px 0;
