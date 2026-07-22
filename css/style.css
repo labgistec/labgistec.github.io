@@ -543,8 +543,7 @@ img {
     background: #f3f3f3;
 }
 
-.menu-dropdown:hover .menu-dropdown-content,
-.menu-dropdown:focus-within .menu-dropdown-content {
+.menu-dropdown:hover .menu-dropdown-content {
     opacity: 1;
     visibility: visible;
     transform: translateY(0);
