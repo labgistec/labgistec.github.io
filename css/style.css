@@ -1237,3 +1237,29 @@ img {
 .team-section {
     padding: 30px 0 50px;
 }
+/* Redução dos espaços verticais da página inicial */
+
+.hero {
+    padding: 45px 0 55px;
+}
+
+.team-section {
+    padding: 30px 0 25px;
+}
+
+#projetos {
+    padding-top: 40px;
+}
+@media (max-width: 620px) {
+    .hero {
+        padding: 38px 0 45px;
+    }
+
+    .team-section {
+        padding: 25px 0 20px;
+    }
+
+    #projetos {
+        padding-top: 35px;
+    }
+}
