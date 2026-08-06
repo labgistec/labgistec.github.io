@@ -1189,3 +1189,45 @@ img {
 .intro-link:hover {
     color: var(--gray-700);
 }
+
+/* Equipe sem o painel lateral */
+
+.team-showcase {
+    width: 100%;
+    display: block !important;
+    grid-template-columns: none !important;
+}
+
+.team-directory {
+    width: 100%;
+    min-width: 0;
+}
+
+.team-directory-group {
+    grid-template-columns: 180px minmax(0, 1fr);
+}
+
+.team-people {
+    width: 100%;
+}
+
+.team-person {
+    flex-shrink: 0;
+}
+
+@media (max-width: 720px) {
+    .team-directory-group {
+        grid-template-columns: 1fr;
+    }
+
+    .team-person {
+        width: auto;
+        max-width: 100%;
+    }
+}
+
+@media (max-width: 460px) {
+    .team-person {
+        width: 100%;
+    }
+}
