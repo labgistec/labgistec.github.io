@@ -863,8 +863,7 @@ img {
 }
 
 .team-showcase {
-    display: grid;
-    grid-template-columns: 310px minmax(0, 1fr);
+    display: block;
     border: 1px solid var(--gray-300);
     background: var(--white);
 }
