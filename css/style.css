@@ -1503,3 +1503,230 @@ html {
 #localizacao {
     scroll-margin-top: calc(var(--header-height) + 20px);
 }
+/* =========================================================
+   CURSO — FAIXA COMPACTA GAS × GISTEC
+   Cole este bloco no final de css/style.css
+   ========================================================= */
+
+.course-section {
+    padding: 58px 0;
+    background: var(--gray-100);
+}
+
+.course-section-heading {
+    margin-bottom: 28px;
+}
+
+.course-feature {
+    display: grid;
+    grid-template-columns: minmax(0, 0.95fr) minmax(0, 1.05fr);
+    border: 1px solid var(--gray-300);
+    border-top: 4px solid var(--black);
+    background: var(--white);
+}
+
+/* Apresentação do curso */
+
+.course-introduction {
+    padding: 28px 32px;
+    border-right: 1px solid var(--gray-300);
+}
+
+.course-topline {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 18px;
+}
+
+.course-partnership {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+}
+
+.course-partnership small {
+    color: var(--gray-500);
+    font-size: 12px;
+    font-weight: 400;
+}
+
+.course-status {
+    padding: 6px 9px;
+    border: 1px solid var(--black);
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 0.10em;
+    text-transform: uppercase;
+}
+
+.course-edition {
+    margin-top: 22px;
+    color: var(--gray-700);
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.09em;
+    text-transform: uppercase;
+}
+
+.course-introduction h3 {
+    margin: 8px 0 0;
+    font-size: clamp(28px, 3.1vw, 41px);
+    font-weight: 500;
+    line-height: 1.08;
+    letter-spacing: -0.035em;
+}
+
+.course-summary {
+    max-width: 550px;
+    margin-top: 16px;
+    color: var(--gray-700);
+    font-size: 12px;
+    line-height: 1.5;
+}
+
+/* Informações resumidas */
+
+.course-information {
+    padding: 28px 32px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.course-facts {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 0;
+    border-bottom: 1px solid var(--gray-300);
+}
+
+.course-facts > div {
+    min-height: 70px;
+    padding: 0 14px 15px;
+    border-right: 1px solid var(--gray-300);
+}
+
+.course-facts > div:first-child {
+    padding-left: 0;
+}
+
+.course-facts > div:last-child {
+    padding-right: 0;
+    border-right: 0;
+}
+
+.course-facts span,
+.course-location > span {
+    display: block;
+    margin-bottom: 7px;
+    color: var(--gray-500);
+    font-size: 8px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+}
+
+.course-facts strong {
+    font-size: 11px;
+    font-weight: 500;
+    line-height: 1.4;
+}
+
+.course-footer {
+    margin-top: 21px;
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 24px;
+}
+
+.course-location strong {
+    display: block;
+    font-size: 13px;
+    font-weight: 500;
+    line-height: 1.4;
+}
+
+.course-location p {
+    margin-top: 4px;
+    color: var(--gray-700);
+    font-size: 10px;
+}
+
+.course-button {
+    min-height: 41px;
+    padding: 0 16px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex: 0 0 auto;
+    border: 1px solid var(--black);
+    background: var(--white);
+    color: var(--black);
+    font-size: 10px;
+    font-weight: 700;
+    transition: 160ms ease;
+}
+
+.course-button:hover {
+    background: var(--black);
+    color: var(--white);
+}
+
+/* Responsividade */
+
+@media (max-width: 1000px) {
+    .course-feature {
+        grid-template-columns: 1fr;
+    }
+
+    .course-introduction {
+        border-right: 0;
+        border-bottom: 1px solid var(--gray-300);
+    }
+}
+
+@media (max-width: 700px) {
+    .course-section {
+        padding: 42px 0;
+    }
+
+    .course-introduction,
+    .course-information {
+        padding: 24px;
+    }
+
+    .course-topline,
+    .course-footer {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    .course-facts {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .course-facts > div,
+    .course-facts > div:first-child,
+    .course-facts > div:last-child {
+        padding: 12px;
+        border-right: 1px solid var(--gray-300);
+        border-bottom: 1px solid var(--gray-300);
+    }
+
+    .course-facts > div:nth-child(2n) {
+        border-right: 0;
+    }
+
+    .course-facts > div:nth-last-child(-n + 2) {
+        border-bottom: 0;
+    }
+
+    .course-button {
+        width: 100%;
+    }
+}
