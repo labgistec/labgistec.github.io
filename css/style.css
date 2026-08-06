@@ -843,3 +843,16 @@ img {
         padding: 30px;
     }
 }
+.intro-link {
+    display: inline-block;
+    margin-top: 10px;
+    padding-bottom: 2px;
+    border-bottom: 1px solid var(--black);
+    font-size: 12px;
+    font-weight: 700;
+    transition: 160ms ease;
+}
+
+.intro-link:hover {
+    color: var(--gray-700);
+}
