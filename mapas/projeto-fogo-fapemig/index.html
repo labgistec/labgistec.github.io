@@ -146,7 +146,7 @@
                 attribution:
                     '&copy; OpenStreetMap contributors'
             }
-        );
+        ).addTo(map);
         const esriSatelite = L.tileLayer(
             'https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}',
             {
@@ -154,7 +154,7 @@
                 attribution:
                     'Tiles &copy; Esri — Sources: Esri, Maxar, Earthstar Geographics e colaboradores'
             }
-        ).addTo(map);
+        )
 
         
         const openTopoMap = L.tileLayer(
