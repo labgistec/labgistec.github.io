@@ -225,7 +225,7 @@
                 </address>
 
                 <a
-                    class="location-link"
+                    class="location-link"href="https://www.openstreetmap.org/?mlat=-18.91768&mlon=-48.25580#map=18/-18.91768/-48.25580"
                     href="https://www.openstreetmap.org/?mlat=-18.9181&mlon=-48.2580#map=18/-18.9181/-48.2580"
                     target="_blank"
                     rel="noopener noreferrer"
@@ -475,17 +475,21 @@
         iconAnchor: [9, 9]
     });
 
-    L.marker(
-        coordenadasIGESC,
-        {
-            icon: locationIcon
-        }
-    )
-    .addTo(locationMap)
-    .bindPopup(
-        '<strong>GISTEC — IGESC/UFU</strong>' +
-        '<br>Campus Santa Mônica — Bloco 1H'
-    );
+  L.marker(
+    coordenadasIGESC,
+    {
+        icon: locationIcon
+    }
+)
+.addTo(locationMap)
+.bindPopup(
+    '<strong>GISTEC — IGESC/UFU</strong>' +
+    '<br>Campus Santa Mônica — Bloco 1H',
+    {
+        autoPan: false
+    }
+)
+.openPopup();
 </script>
 </body>
 </html>
