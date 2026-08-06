@@ -437,9 +437,16 @@
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 
 <script>
+    // Centro aproximado do Campus Santa Mônica
+    const centroCampus = [
+        -18.91890,
+        -48.25730
+    ];
+
+    // Localização do Bloco 1H
     const coordenadasIGESC = [
-         -18.91768,
-    -48.25580
+        -18.91768,
+        -48.25580
     ];
 
     const locationMap = L.map(
@@ -449,7 +456,7 @@
             zoomControl: true
         }
     ).setView(
-        coordenadasIGESC,
+        centroCampus,
         17
     );
 
@@ -468,19 +475,17 @@
         iconAnchor: [9, 9]
     });
 
-    const locationMarker = L.marker(
+    L.marker(
         coordenadasIGESC,
         {
             icon: locationIcon
         }
-    ).addTo(locationMap);
-
-    locationMarker
-        .bindPopup(
-            '<strong>GISTEC — IGESC/UFU</strong>' +
-            '<br>Campus Santa Mônica — Bloco 1H'
-        )
-        .openPopup();
+    )
+    .addTo(locationMap)
+    .bindPopup(
+        '<strong>GISTEC — IGESC/UFU</strong>' +
+        '<br>Campus Santa Mônica — Bloco 1H'
+    );
 </script>
 </body>
 </html>
