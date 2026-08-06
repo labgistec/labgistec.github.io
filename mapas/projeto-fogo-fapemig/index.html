@@ -243,54 +243,123 @@
                 }
             }).addTo(map);
 
-            /* Grupo que reunirá limites e siglas */
+          /* Grupo que reunirá limites e siglas */
 
-            const estados = L.layerGroup();
+const estados = L.layerGroup();
+const marcadoresSiglas = [];
 
-            /* Limites estaduais */
+/* Limites estaduais */
 
-            const limitesEstados = L.geoJSON(dadosEstados, {
-                style: {
-                    color: '#ffffff',
-                    weight: 1.5,
-                    opacity: 0.95,
-                    fill: false,
-                    fillOpacity: 0
-                },
+const limitesEstados = L.geoJSON(dadosEstados, {
+    style: {
+        color: '#ffffff',
+        weight: 1.5,
+        opacity: 0.95,
+        fill: false,
+        fillOpacity: 0
+    },
 
-                onEachFeature: (feature, layer) => {
-                    const sigla =
-                        feature.properties &&
-                        feature.properties.sigla
-                            ? feature.properties.sigla
-                            : '';
+    onEachFeature: (feature, layer) => {
+        const sigla =
+            feature.properties &&
+            feature.properties.sigla
+                ? feature.properties.sigla
+                : '';
 
-                    if (sigla && layer.getBounds) {
-                        const centro = layer
-                            .getBounds()
-                            .getCenter();
+        if (sigla) {
+            const marcadorSigla = L.marker(
+                [0, 0],
+                {
+                    interactive: false,
+                    opacity: 0,
 
-                        const marcadorSigla = L.marker(
-                            centro,
-                            {
-                                interactive: false,
-
-                                icon: L.divIcon({
-                                    className: 'sigla-estado',
-                                    html: sigla,
-                                    iconSize: [40, 20],
-                                    iconAnchor: [20, 10]
-                                })
-                            }
-                        );
-
-                        marcadorSigla.addTo(estados);
-                    }
+                    icon: L.divIcon({
+                        className: 'sigla-estado',
+                        html: sigla,
+                        iconSize: [40, 20],
+                        iconAnchor: [20, 10]
+                    })
                 }
-            });
+            );
 
-            limitesEstados.addTo(estados);
-            estados.addTo(map);
+            marcadorSigla.addTo(estados);
+
+            marcadoresSiglas.push({
+                marcador: marcadorSigla,
+                camada: layer
+            });
+        }
+    }
+});
+
+limitesEstados.addTo(estados);
+estados.addTo(map);
+
+/*
+ * Reposiciona cada sigla no centro da parte
+ * do estado que está visível na tela.
+ */
+
+function atualizarPosicaoSiglas() {
+    const limitesTela = map.getBounds();
+
+    marcadoresSiglas.forEach(item => {
+        const limitesEstado =
+            item.camada.getBounds();
+
+        /*
+         * Esconde a sigla quando nenhuma parte
+         * do estado estiver visível.
+         */
+        if (!limitesTela.intersects(limitesEstado)) {
+            item.marcador.setOpacity(0);
+            return;
+        }
+
+        /*
+         * Calcula a interseção entre os limites
+         * do estado e a área atualmente visível.
+         */
+        const sul = Math.max(
+            limitesTela.getSouth(),
+            limitesEstado.getSouth()
+        );
+
+        const norte = Math.min(
+            limitesTela.getNorth(),
+            limitesEstado.getNorth()
+        );
+
+        const oeste = Math.max(
+            limitesTela.getWest(),
+            limitesEstado.getWest()
+        );
+
+        const leste = Math.min(
+            limitesTela.getEast(),
+            limitesEstado.getEast()
+        );
+
+        const latitude = (sul + norte) / 2;
+        const longitude = (oeste + leste) / 2;
+
+        item.marcador
+            .setLatLng([latitude, longitude])
+            .setOpacity(1);
+    });
+}
+
+/*
+ * Atualiza as siglas sempre que o usuário
+ * movimentar, ampliar ou redimensionar o mapa.
+ */
+
+map.on(
+    'moveend zoomend resize',
+    atualizarPosicaoSiglas
+);
+
+atualizarPosicaoSiglas();
 
             /* Enquadramento da Canastra */
 
