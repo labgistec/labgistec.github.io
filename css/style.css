@@ -1490,3 +1490,16 @@ img {
         width: 100%;
     }
 }
+html {
+    scroll-padding-top: calc(var(--header-height) + 20px);
+}
+
+#inicio,
+#projetos,
+#dados,
+#publicacoes,
+#cursos,
+#equipe,
+#localizacao {
+    scroll-margin-top: calc(var(--header-height) + 20px);
+}
