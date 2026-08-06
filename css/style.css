@@ -853,6 +853,340 @@ img {
     transition: 160ms ease;
 }
 
+/* =========================================================
+   EQUIPE — DIRETÓRIO INSTITUCIONAL
+   Cole este bloco no final de css/style.css
+   ========================================================= */
+
+.team-section {
+    background: var(--white);
+}
+
+.team-showcase {
+    display: grid;
+    grid-template-columns: 310px minmax(0, 1fr);
+    border: 1px solid var(--gray-300);
+    background: var(--white);
+}
+
+/* Painel preto */
+
+.team-panel {
+    min-height: 760px;
+    padding: 46px 38px 34px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    background: var(--black);
+    color: var(--white);
+}
+
+.team-panel-label {
+    margin-bottom: 22px;
+    color: #bdbdbd;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.20em;
+    text-transform: uppercase;
+}
+
+.team-panel h2 {
+    margin: 0;
+    font-size: clamp(38px, 4vw, 54px);
+    font-weight: 500;
+    line-height: 1.03;
+    letter-spacing: -0.04em;
+}
+
+.team-panel-text {
+    margin-top: 26px;
+    color: #bdbdbd;
+    font-size: 14px;
+    line-height: 1.65;
+}
+
+.team-leadership {
+    margin-top: 32px;
+    padding: 17px 0;
+    border-top: 1px solid #454545;
+    border-bottom: 1px solid #454545;
+}
+
+.team-leadership span,
+.team-leadership strong {
+    display: block;
+}
+
+.team-leadership span {
+    margin-bottom: 6px;
+    color: #a8a8a8;
+    font-size: 10px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+}
+
+.team-leadership strong {
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 1.4;
+}
+
+.team-stats > div {
+    min-height: 58px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 18px;
+    border-top: 1px solid #3f3f3f;
+}
+
+.team-stats strong {
+    font-size: 25px;
+    font-weight: 400;
+}
+
+.team-stats span {
+    color: #a8a8a8;
+    font-size: 9px;
+    letter-spacing: 0.13em;
+    text-align: right;
+    text-transform: uppercase;
+}
+
+/* Diretório de nomes */
+
+.team-directory {
+    min-width: 0;
+    padding: 43px 44px 36px;
+}
+
+.team-directory-heading {
+    padding-bottom: 20px;
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 28px;
+    border-bottom: 1px solid var(--black);
+}
+
+.team-directory-heading .section-label {
+    margin-bottom: 7px;
+}
+
+.team-directory-heading h3 {
+    margin: 0;
+    font-size: 27px;
+    font-weight: 500;
+    line-height: 1.15;
+}
+
+.team-directory-heading > span {
+    padding-bottom: 3px;
+    color: var(--gray-500);
+    font-size: 10px;
+    letter-spacing: 0.11em;
+    text-align: right;
+    text-transform: uppercase;
+}
+
+.team-directory-group {
+    padding: 25px 0;
+    display: grid;
+    grid-template-columns: 180px minmax(0, 1fr);
+    gap: 26px;
+    border-bottom: 1px solid var(--gray-300);
+}
+
+.team-directory-group-last {
+    padding-bottom: 0;
+    border-bottom: 0;
+}
+
+.team-directory-title h4 {
+    margin: 0 0 6px;
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 1.3;
+}
+
+.team-directory-title span {
+    color: var(--gray-500);
+    font-size: 9px;
+    letter-spacing: 0.13em;
+    text-transform: uppercase;
+}
+
+.team-people {
+    display: flex;
+    flex-wrap: wrap;
+    align-content: flex-start;
+    gap: 8px;
+}
+
+.team-person {
+    min-height: 31px;
+    padding: 7px 11px;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    border: 1px solid var(--gray-300);
+    background: #fafafa;
+    color: var(--gray-900);
+    font-size: 11px;
+    line-height: 1.3;
+    transition: 160ms ease;
+}
+
+.team-person:hover {
+    border-color: var(--gray-700);
+    background: var(--white);
+}
+
+.team-person-leader {
+    border-color: var(--black);
+    background: var(--black);
+    color: var(--white);
+}
+
+.team-person-leader:hover {
+    background: var(--gray-900);
+    color: var(--white);
+}
+
+.team-person-leader small {
+    padding-left: 8px;
+    border-left: 1px solid #666;
+    color: #c9c9c9;
+    font-size: 8px;
+    font-weight: 700;
+    letter-spacing: 0.11em;
+    text-transform: uppercase;
+}
+
+.team-people-alumni .team-person {
+    color: var(--gray-700);
+    font-size: 10.5px;
+}
+
+/* Responsividade */
+
+@media (max-width: 1000px) {
+    .team-showcase {
+        grid-template-columns: 265px minmax(0, 1fr);
+    }
+
+    .team-panel {
+        padding: 38px 29px 30px;
+    }
+
+    .team-panel h2 {
+        font-size: 39px;
+    }
+
+    .team-directory {
+        padding: 36px 30px 32px;
+    }
+
+    .team-directory-group {
+        grid-template-columns: 1fr;
+        gap: 16px;
+    }
+}
+
+@media (max-width: 720px) {
+    .team-showcase {
+        grid-template-columns: 1fr;
+    }
+
+    .team-panel {
+        min-height: auto;
+        padding: 38px 28px 28px;
+    }
+
+    .team-panel h2 {
+        max-width: 440px;
+        font-size: clamp(37px, 11vw, 50px);
+    }
+
+    .team-panel-text {
+        max-width: 520px;
+    }
+
+    .team-leadership {
+        max-width: 390px;
+    }
+
+    .team-stats {
+        margin-top: 35px;
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        border-top: 1px solid #3f3f3f;
+    }
+
+    .team-stats > div {
+        min-height: 76px;
+        padding: 12px;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: center;
+        border-top: 0;
+        border-right: 1px solid #3f3f3f;
+    }
+
+    .team-stats > div:first-child {
+        padding-left: 0;
+    }
+
+    .team-stats > div:last-child {
+        border-right: 0;
+    }
+
+    .team-stats span {
+        text-align: left;
+    }
+
+    .team-directory {
+        padding: 32px 25px 30px;
+    }
+
+    .team-directory-heading {
+        align-items: flex-start;
+        flex-direction: column;
+        gap: 11px;
+    }
+
+    .team-directory-heading > span {
+        text-align: left;
+    }
+}
+
+@media (max-width: 460px) {
+    .team-stats {
+        grid-template-columns: 1fr;
+    }
+
+    .team-stats > div,
+    .team-stats > div:first-child {
+        min-height: 54px;
+        padding: 8px 0;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+        border-right: 0;
+        border-bottom: 1px solid #3f3f3f;
+    }
+
+    .team-stats > div:last-child {
+        border-bottom: 0;
+    }
+
+    .team-person {
+        width: 100%;
+        justify-content: space-between;
+    }
+}
+
 .intro-link:hover {
     color: var(--gray-700);
 }
