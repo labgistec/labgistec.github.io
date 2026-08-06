@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Serra da Canastra | Projeto FAPEMIG Fogo</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+    <style>
+        html, body, #map { width: 100%; height: 100%; margin: 0; }
+        body { font-family: Arial, Helvetica, sans-serif; color: #111; }
+        .map-title {
+            position: absolute; top: 14px; right: 14px; z-index: 800;
+            max-width: 290px; padding: 13px 16px; background: rgba(255,255,255,.94);
+            border: 1px solid #d8d8d8; box-shadow: 0 5px 18px rgba(0,0,0,.08);
+        }
+        .map-title strong { display: block; margin-bottom: 3px; font-size: 14px; }
+        .map-title span { color: #555; font-size: 11px; line-height: 1.4; }
+        .map-status {
+            position: absolute; left: 50%; top: 50%; z-index: 900;
+            transform: translate(-50%,-50%); padding: 12px 16px;
+            background: #fff; border: 1px solid #ddd; font-size: 13px;
+        }
+        .download-data {
+            display: inline-block; margin-top: 8px; color: #111; font-size: 11px;
+            font-weight: 700; text-decoration: underline; text-underline-offset: 3px;
+        }
+        .leaflet-control-layers { border-radius: 0; box-shadow: 0 2px 12px rgba(0,0,0,.12); }
+        @media (max-width: 600px) {
+            .map-title { left: 52px; right: 10px; max-width: none; }
+        }
+    </style>
+</head>
+<body>
+    <div id="map"></div>
+    <div class="map-title">
+        <strong>Parque Nacional da Serra da Canastra</strong>
+        <span>Área de interesse do Projeto FAPEMIG Fogo</span><br>
+        <a class="download-data" href="../../data/canastra.geojson" download>Baixar GeoJSON</a>
+    </div>
+    <div id="mapStatus" class="map-status">Carregando camada...</div>
+
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script>
+        const map = L.map('map', { zoomControl: true, scrollWheelZoom: true });
+
+        const openTopoMap = L.tileLayer('https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png', {
+            maxZoom: 17,
+            attribution: '© OpenStreetMap contributors · OpenTopoMap (CC-BY-SA)'
+        }).addTo(map);
+
+        const openStreetMap = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            maxZoom: 19,
+            attribution: '© OpenStreetMap contributors'
+        });
+
+        fetch('../../data/canastra.geojson')
+            .then(response => {
+                if (!response.ok) throw new Error('Arquivo espacial não encontrado.');
+                return response.json();
+            })
+            .then(data => {
+                const canastra = L.geoJSON(data, {
+                    style: {
+                        color: '#202020', weight: 2, opacity: 1,
+                        fillColor: '#d86b3d', fillOpacity: 0.16
+                    },
+                    onEachFeature: (feature, layer) => {
+                        layer.bindPopup('<strong>Parque Nacional da Serra da Canastra</strong><br>Área de interesse do projeto');
+                    }
+                }).addTo(map);
+
+                map.fitBounds(canastra.getBounds(), { padding: [22, 22] });
+                L.control.layers(
+                    { 'OpenTopoMap': openTopoMap, 'OpenStreetMap': openStreetMap },
+                    { 'Área da Canastra': canastra },
+                    { collapsed: false }
+                ).addTo(map);
+                L.control.scale({ imperial: false }).addTo(map);
+                document.getElementById('mapStatus').remove();
+            })
+            .catch(error => {
+                const status = document.getElementById('mapStatus');
+                status.textContent = 'Não foi possível carregar o mapa: ' + error.message;
+                map.setView([-20.37, -46.60], 9);
+            });
+    </script>
+</body>
+</html>
