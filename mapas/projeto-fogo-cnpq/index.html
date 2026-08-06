@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Região do 2º COB | Projeto CNPq Fogo</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+
+    <style>
+        html, body, #map {
+            width: 100%;
+            height: 100%;
+            margin: 0;
+        }
+
+        body {
+            color: #111;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        .map-title {
+            position: absolute;
+            top: 14px;
+            right: 14px;
+            z-index: 800;
+            max-width: 290px;
+            padding: 13px 16px;
+            background: rgba(255, 255, 255, 0.94);
+            border: 1px solid #d8d8d8;
+            box-shadow: 0 5px 18px rgba(0, 0, 0, 0.08);
+        }
+
+        .map-title strong {
+            display: block;
+            margin-bottom: 3px;
+            font-size: 14px;
+        }
+
+        .map-title span {
+            color: #555;
+            font-size: 11px;
+            line-height: 1.4;
+        }
+
+        .download-data {
+            display: inline-block;
+            margin-top: 8px;
+            color: #111;
+            font-size: 11px;
+            font-weight: 700;
+            text-decoration: underline;
+            text-underline-offset: 3px;
+        }
+
+        .map-status {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            z-index: 900;
+            padding: 12px 16px;
+            background: #fff;
+            border: 1px solid #ddd;
+            font-size: 13px;
+            transform: translate(-50%, -50%);
+        }
+
+        .leaflet-control-layers {
+            border-radius: 0;
+            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.12);
+        }
+
+        .sigla-estado {
+            color: #fff;
+            font-size: 12px;
+            font-weight: 700;
+            line-height: 20px;
+            text-align: center;
+            text-shadow:
+                -1px -1px 2px #000,
+                 1px -1px 2px #000,
+                -1px  1px 2px #000,
+                 1px  1px 2px #000;
+            pointer-events: none;
+        }
+
+        @media (max-width: 600px) {
+            .map-title {
+                right: 10px;
+                left: 52px;
+                max-width: none;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div id="map"></div>
+
+    <div class="map-title">
+        <strong>Região do 2º COB</strong>
+        <span>Área de interesse do Projeto CNPq Fogo</span><br>
+        <a class="download-data" href="../../dados/regiao2cob.geojson" download>
+            Baixar GeoJSON
+        </a>
+    </div>
+
+    <div id="mapStatus" class="map-status">Carregando camadas...</div>
+
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+    <script>
+        const map = L.map('map', {
+            zoomControl: true,
+            scrollWheelZoom: true
+        });
+
+        const esriSatelite = L.tileLayer(
+            'https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}',
+            {
+                maxZoom: 19,
+                attribution: 'Tiles &copy; Esri — Sources: Esri, Maxar, Earthstar Geographics e colaboradores'
+            }
+        ).addTo(map);
+
+        const openStreetMap = L.tileLayer(
+            'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
+            {
+                maxZoom: 19,
+                attribution: '&copy; OpenStreetMap contributors'
+            }
+        );
+
+        const openTopoMap = L.tileLayer(
+            'https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png',
+            {
+                maxZoom: 17,
+                attribution: '&copy; OpenStreetMap contributors · OpenTopoMap (CC-BY-SA)'
+            }
+        );
+
+        function carregarGeoJSON(caminho) {
+            return fetch(caminho)
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Arquivo não encontrado: ' + caminho);
+                    }
+                    return response.text();
+                })
+                .then(texto => {
+                    const conteudo = texto.trim();
+
+                    if (!conteudo) {
+                        throw new Error('O arquivo está vazio: ' + caminho);
+                    }
+
+                    try {
+                        return JSON.parse(conteudo);
+                    } catch (erro) {
+                        const feicoes = conteudo
+                            .split(/\r?\n/)
+                            .filter(linha => linha.trim())
+                            .map(linha => JSON.parse(linha));
+
+                        return {
+                            type: 'FeatureCollection',
+                            features: feicoes
+                        };
+                    }
+                });
+        }
+
+        Promise.all([
+            carregarGeoJSON('../../dados/regiao2cob.geojson'),
+            carregarGeoJSON('../../dados/limites_estados.geojsonl')
+        ])
+        .then(([dados2COB, dadosEstados]) => {
+            const regiao2COB = L.geoJSON(dados2COB, {
+                style: {
+                    color: '#ff0000',
+                    weight: 3,
+                    opacity: 1,
+                    fillColor: '#ff0000',
+                    fillOpacity: 0.08
+                },
+                onEachFeature: (feature, layer) => {
+                    const area = feature.properties && feature.properties.Area_Km2
+                        ? Number(feature.properties.Area_Km2).toLocaleString('pt-BR', {
+                            maximumFractionDigits: 0
+                        })
+                        : null;
+
+                    let conteudo = '<strong>Região do 2º COB</strong>' +
+                        '<br>Área de interesse do Projeto CNPq Fogo';
+
+                    if (area) {
+                        conteudo += '<br>Área: ' + area + ' km²';
+                    }
+
+                    layer.bindPopup(conteudo);
+                }
+            }).addTo(map);
+
+            const estados = L.layerGroup();
+            const marcadoresSiglas = [];
+
+            const limitesEstados = L.geoJSON(dadosEstados, {
+                style: {
+                    color: '#ffffff',
+                    weight: 1.5,
+                    opacity: 0.95,
+                    fill: false,
+                    fillOpacity: 0
+                },
+                onEachFeature: (feature, layer) => {
+                    const sigla = feature.properties && feature.properties.sigla
+                        ? feature.properties.sigla
+                        : '';
+
+                    if (sigla) {
+                        const marcador = L.marker([0, 0], {
+                            interactive: false,
+                            opacity: 0,
+                            icon: L.divIcon({
+                                className: 'sigla-estado',
+                                html: sigla,
+                                iconSize: [40, 20],
+                                iconAnchor: [20, 10]
+                            })
+                        });
+
+                        marcador.addTo(estados);
+                        marcadoresSiglas.push({ marcador, camada: layer });
+                    }
+                }
+            });
+
+            limitesEstados.addTo(estados);
+            estados.addTo(map);
+
+            function atualizarPosicaoSiglas() {
+                const limitesTela = map.getBounds();
+
+                marcadoresSiglas.forEach(item => {
+                    const limitesEstado = item.camada.getBounds();
+
+                    if (!limitesTela.intersects(limitesEstado)) {
+                        item.marcador.setOpacity(0);
+                        return;
+                    }
+
+                    const sul = Math.max(limitesTela.getSouth(), limitesEstado.getSouth());
+                    const norte = Math.min(limitesTela.getNorth(), limitesEstado.getNorth());
+                    const oeste = Math.max(limitesTela.getWest(), limitesEstado.getWest());
+                    const leste = Math.min(limitesTela.getEast(), limitesEstado.getEast());
+
+                    item.marcador
+                        .setLatLng([(sul + norte) / 2, (oeste + leste) / 2])
+                        .setOpacity(1);
+                });
+            }
+
+            map.fitBounds(regiao2COB.getBounds(), { padding: [22, 22] });
+
+            L.control.layers(
+                {
+                    'Imagem de satélite — Esri': esriSatelite,
+                    'OpenStreetMap': openStreetMap,
+                    'OpenTopoMap': openTopoMap
+                },
+                {
+                    'Região do 2º COB': regiao2COB,
+                    'Estados': estados
+                },
+                {
+                    collapsed: false,
+                    position: 'bottomright'
+                }
+            ).addTo(map);
+
+            L.control.scale({ imperial: false }).addTo(map);
+
+            map.on('moveend zoomend resize', atualizarPosicaoSiglas);
+            atualizarPosicaoSiglas();
+
+            document.getElementById('mapStatus').remove();
+        })
+        .catch(error => {
+            const status = document.getElementById('mapStatus');
+            status.textContent = 'Não foi possível carregar o mapa: ' + error.message;
+            map.setView([-18.5, -48.5], 7);
+            console.error(error);
+        });
+    </script>
+</body>
+</html>
