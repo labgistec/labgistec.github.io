@@ -352,13 +352,14 @@ function atualizarPosicaoSiglas() {
  * Atualiza as siglas sempre que o usuário
  * movimentar, ampliar ou redimensionar o mapa.
  */
-
 map.on(
     'moveend zoomend resize',
     atualizarPosicaoSiglas
 );
 
-atualizarPosicaoSiglas();
+map.whenReady(() => {
+    atualizarPosicaoSiglas();
+});
 
             /* Enquadramento da Canastra */
 
