@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Mapa interativo e informações sobre o Projeto FAPEMIG Fogo na Serra da Canastra.">
+
+    <title>Projeto FAPEMIG Fogo | GISTEC</title>
+
+    <link rel="stylesheet" href="../css/style.css">
+
+    <style>
+       .project-page {
+    padding: 42px 0 70px;
+}
+
+        .project-return {
+            display: inline-block;
+            margin-bottom: 45px;
+            color: #333333;
+            text-decoration: none;
+        }
+
+        .project-return:hover {
+            text-decoration: underline;
+        }
+
+        .project-heading {
+            display: grid;
+            grid-template-columns: 1.25fr 0.75fr;
+            gap: 64px;
+            align-items: start;
+            margin-bottom: 30px;
+          
+        }
+
+        .project-label {
+            margin-bottom: 15px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+        }
+
+.project-heading h1 {
+    margin: 0;
+    max-width: 820px;
+    font-size: clamp(1.6rem, 1.8vw, 2rem);
+    font-weight: 500;
+    text-align: justify;
+    line-height: 1.18;
+    letter-spacing: -0.02em;
+}
+
+        .project-details {
+            padding: 26px;
+            background: #fafaf8;
+            border: 1px solid #ddddda;
+            box-shadow: 0 16px 40px rgba(0, 0, 0, 0.04);
+        }
+
+        .project-details h2 {
+            margin: 0 0 20px;
+            font-size: 1.35rem;
+        }
+
+        .project-details dl {
+            margin: 0;
+        }
+
+        .project-details dl div {
+            padding: 10px 0;
+            border-bottom: 1px solid #e4e4e4;
+        }
+
+        .project-details dl div:last-child {
+            border-bottom: 0;
+        }
+
+        .project-details dt {
+            margin-bottom: 4px;
+            color: #666666;
+            font-size: 0.72rem;
+            font-weight: 600;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+        }
+
+        .project-details dd {
+            margin: 0;
+            font-size: 0.95rem;
+            line-height: 1.5;
+        }
+
+       .project-summary {
+    max-width: 1000px;
+   margin-bottom: 24px;
+padding-bottom: 18px;
+    border-bottom: 1px solid #d8d8d8;
+}
+
+        .project-summary h2,
+        .project-team-header h2,
+        .project-map-title {
+            margin: 0 0 20px;
+            font-size: 1.3rem;
+            font-weight: 500;
+        }
+
+        .project-summary p {
+            margin: 0 0 18px;
+            color: #3f3f3f;
+            font-size: 1.0rem;
+            text-align: justify;
+            line-height: 1.5;
+        }
+
+        .project-team {
+            margin: 0 0 80px;
+        }
+
+        .project-team-header {
+            margin-bottom: 30px;
+        }
+
+       .team-coordinator {
+    display: grid;
+    grid-template-columns: minmax(220px, 0.7fr) 1.3fr;
+    gap: 30px;
+    align-items: end;
+
+    margin-bottom: 50px;
+    padding: 24px 0;
+
+    color: #111111;
+    background: transparent;
+
+    border-top: 1px solid #cccccc;
+    border-bottom: 1px solid #cccccc;
+}
+
+      .team-coordinator span {
+    color: #666666;
+}
+
+.team-coordinator h3 {
+    margin: 0 0 8px;
+    font-size: 1.4rem;
+    font-weight: 500;
+}
+
+.team-coordinator p {
+    margin: 4px 0;
+    color: #555555;
+}
+        .team-group {
+            margin-top: 46px;
+        }
+
+        .team-group > h3 {
+            margin-bottom: 0;
+            padding-bottom: 14px;
+            border-bottom: 2px solid #222222;
+            font-size: 1.15rem;
+            font-weight: 600;
+        }
+
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            column-gap: 34px;
+        }
+
+        .team-card {
+            padding: 20px 0;
+            background: transparent;
+            border-bottom: 1px solid #dddddd;
+        }
+
+        .team-card h4 {
+            margin: 0 0 10px;
+            font-size: 1.05rem;
+            font-weight: 600;
+        }
+
+        .team-card p {
+            margin: 3px 0;
+            color: #555555;
+            font-size: 0.9rem;
+            line-height: 1.5;
+        }
+
+        .project-map-heading {
+            margin-bottom: 24px;
+            padding-top: 42px;
+            border-top: 1px solid #cccccc;
+        }
+
+        .project-map-title {
+            margin-top: 0;
+        }
+
+        .project-map-description {
+            max-width: 720px;
+            margin: -8px 0 0;
+            color: #555555;
+            line-height: 1.65;
+        }
+
+        .project-map {
+            display: block;
+            width: 100%;
+            height: 720px;
+            border: 1px solid #dddddd;
+        }
+
+        @media (max-width: 900px) {
+            .project-heading {
+                grid-template-columns: 1fr;
+                gap: 35px;
+            }
+
+            .team-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .team-coordinator {
+                grid-template-columns: 1fr;
+                gap: 12px;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .project-page {
+                padding: 45px 0;
+            }
+
+            .project-heading h1 {
+                font-size: 2rem;
+            }
+
+            .project-map {
+                height: 600px;
+            }
+        }
+    .project-hero-image {
+    display: block;
+    width: 100%;
+    height: 230px;
+    object-fit: cover;
+    object-position: center 70%;
+    box-sizing: border-box;
+
+    margin-top: 16px;
+    padding: 0;
+    border: none;
+    background: transparent;
+
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.08);
+}
+    </style>
+</head>
+
+<body>
+    <header class="site-header">
+        <div class="container header-content">
+            <a class="brand" href="../index.html" aria-label="Página inicial do GISTEC">
+                <img src="../imagens/logo.png" alt="Logo GISTEC" class="brand-logo">
+
+                <div class="brand-copy">
+                    <strong>GISTEC</strong>
+                    <span>Geoinformação, Território e Conservação</span>
+                </div>
+            </a>
+
+            <nav class="main-menu" aria-label="Navegação principal">
+                <a href="../index.html">Início</a>
+                <div class="menu-dropdown">
+                    <a href="../index.html#projetos">Projetos</a>
+                    <div class="menu-dropdown-content">
+                        <a href="cnpq-fogo.html">CNPq Fogo</a>
+                        <a href="fapemig-fogo.html">Fapemig Fogo</a>
+                    </div>
+                </div>
+                <a href="../index.html#mapas">Mapas</a>
+                <a href="../index.html#dados">Dados</a>
+                <a href="../index.html#publicacoes">Publicações</a>
+            </nav>
+        </div>
+    </header>
+<main class="project-page">
+        <div class="container">
+
+            <div class="project-heading">
+                <div>
+                    <p class="project-label">Projeto FAPEMIG</p>
+
+                    <h1>
+                        Incêndios e Manejo Integrado do Fogo no Parque Nacional
+                        da Serra da Canastra
+                    </h1>
+                    <img
+    class="project-hero-image"
+    src="../imagens/cnpq-fogo-nbr-rgb-wide.png"
+    alt="Paisagem afetada pelo fogo, representativa do tema do projeto">
+                </div>
+
+                <aside class="project-details" aria-label="Informações do projeto">
+                    <h2>Informações do projeto</h2>
+
+                    <dl>
+                        <div>
+                            <dt>Processo nº</dt>
+                            <dd>APQ-02486-26</dd>
+                        </div>
+
+                        <div>
+                            <dt>Modalidade</dt>
+                            <dd>Demanda Universal - Categoria B</dd>
+                        </div>
+
+                        <div>
+                            <dt>Coordenador</dt>
+                            <dd>Sílvio Carlos Rodrigues</dd>
+                        </div>
+
+                        <div>
+                            <dt>Vigência</dt>
+                            <dd>01/01/2027 a 31/12/2029 - 36 meses</dd>
+                        </div>
+
+                        <div>
+                            <dt>Instituição</dt>
+                            <dd>Universidade Federal de Uberlândia</dd>
+                        </div>
+                    </dl>
+                </aside>
+            </div>
+
+            <section class="project-summary">
+                <h2>Resumo do projeto</h2>
+
+                <p>
+                    O Cerrado é um ecossistema dependente do fogo, com biotas que
+                    coevoluíram sob regimes de queimadas naturais responsáveis por manter
+                    sua estrutura e biodiversidade. Historicamente, o fogo atuou como força
+                    evolutiva; entretanto, o desenvolvimento das atividades antrópicas
+                    alterou esses regimes, aumentando a frequência das ocorrências e
+                    deslocando sua sazonalidade para o final da estação seca. Essas
+                    alterações favorecem incêndios de alta intensidade, com efeitos severos
+                    sobre a vegetação, a biodiversidade e as emissões de gases de efeito
+                    estufa. O projeto busca compreender as respostas das comunidades
+                    vegetais a esses regimes alterados no Parque Nacional da Serra da
+                    Canastra, investigando como a recorrência e a intensidade do fogo afetam
+                    a vegetação e a biogeoquímica do solo. Os resultados deverão fornecer
+                    bases científicas para o Manejo Integrado do Fogo, contribuindo para a
+                    resiliência do ecossistema e a manutenção dos serviços ambientais diante
+                    das mudanças climáticas e das transformações no uso da terra.
+                </p>
+            </section>
+
+            <section class="project-team">
+                <div class="project-team-header">
+                    <p class="project-label">Pessoas</p>
+                    <h2>Equipe do projeto</h2>
+                </div>
+
+                <article class="team-coordinator">
+                    <div>
+                        <span>Coordenação</span>
+                        <h3>Sílvio Carlos Rodrigues</h3>
+                    </div>
+
+                    <div>
+                        <p>Coordenador do projeto</p>
+                        <p>Universidade Federal de Uberlândia</p>
+                    </div>
+                </article>
+
+                <div class="team-group">
+                    <h3>Subcoordenação</h3>
+                    <div class="team-grid">
+                        <article class="team-card">
+                            <span>Subcoordenador</span>
+                            <h4>Alan Silveira</h4>
+                            <p>Universidade Federal de Uberlândia</p>
+                        </article>
+                        <article class="team-card">
+                            <span>Subcoordenador</span>
+                            <h4>João Vitor Meza Bravo</h4>
+                            <p>Universidade Federal de Uberlândia</p>
+                        </article>
+                    </div>
+                </div>
+
+                <div class="team-group">
+                    <h3>Pesquisadores e colaboradores</h3>
+                    <div class="team-grid">
+                        <article class="team-card">
+                            <span>Colaborador</span>
+                            <h4>Carlos Miguel Simões da Silva</h4>
+                            <p>Instituto Chico Mendes de Conservação da Biodiversidade</p>
+                        </article>
+                        <article class="team-card">
+                            <span>Colaborador</span>
+                            <h4>Haendell Luiz Silva Costa</h4>
+                            <p>Corpo de Bombeiros Militar de Minas Gerais</p>
+                        </article>
+                        <article class="team-card">
+                            <span>Colaboradora</span>
+                            <h4>Anna Beatriz Pereira dos Santos</h4>
+                            <p>Universidade Federal de Uberlândia</p>
+                        </article>
+                    </div>
+                </div>
+
+                <div class="team-group">
+                    <h3>Pesquisadores internacionais</h3>
+                    <div class="team-grid">
+                        <article class="team-card">
+                            <span>Pesquisador internacional</span>
+                            <h4>António Bento Gonçalves</h4>
+                            <p>Universidade do Minho</p>
+                        </article>
+                        <article class="team-card">
+                            <span>Pesquisador internacional</span>
+                            <h4>António Avelino Batista Vieira</h4>
+                            <p>Universidade do Minho</p>
+                        </article>
+                        <article class="team-card">
+                            <span>Pesquisador internacional</span>
+                            <h4>Xavier Úbeda</h4>
+                            <p>Universidade de Barcelona</p>
+                        </article>
+                    </div>
+                </div>
+
+                <div class="team-group">
+                    <h3>Estudantes</h3>
+                    <div class="team-grid">
+                        <article class="team-card">
+                            <span>Doutoranda</span>
+                            <h4>Paula Meirilane Soares de Araújo</h4>
+                            <p>Universidade Federal de Uberlândia</p>
+                        </article>
+                        <article class="team-card">
+                            <span>Doutoranda</span>
+                            <h4>Beatriz Bomfim Santos</h4>
+                            <p>Universidade Federal de Uberlândia</p>
+                        </article>
+                    </div>
+                </div>
+            </section>
+
+            <div class="project-map-heading">
+                <p class="project-label">Cartografia interativa</p>
+                <h2 class="project-map-title">
+                    Área de interesse do projeto e dados
+                </h2>
+
+                <p class="project-map-description">
+                    Explore os limites do Parque Nacional da Serra da Canastra
+                    e consulte a camada geoespacial disponibilizada pelo projeto.
+                </p>
+            </div>
+
+            <iframe
+                class="project-map"
+                src="../mapas/projeto-fogo-fapemig/index.html"
+                title="Área de interesse do Projeto FAPEMIG Fogo"
+                loading="lazy"
+                allowfullscreen>
+            </iframe>
+        </div>
+    </main>
+
+    <footer class="site-footer">
+        <div class="container footer-grid">
+            <div class="footer-brand">
+                <img src="../imagens/logo.png" alt="Logo GISTEC">
+
+                <div>
+                    <strong>GISTEC</strong>
+                    <span>Geoinformação, Território e Conservação</span>
+                </div>
+            </div>
+
+            <div>
+                <strong>Instituição</strong>
+                <p>Universidade Federal de Uberlândia</p>
+                <p>Instituto de Geografia, Geociências e Saúde Coletiva</p>
+            </div>
+
+            <div>
+                <strong>Projeto</strong>
+                <p>Fapemig Fogo - APQ-02486-26</p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
