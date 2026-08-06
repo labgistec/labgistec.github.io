@@ -648,3 +648,110 @@ img {
         columns: 1;
     }
 }
+/* Projetos em destaque */
+
+.featured-projects {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    border-top: 1px solid var(--gray-300);
+    border-left: 1px solid var(--gray-300);
+}
+
+.featured-project {
+    display: flex;
+    min-width: 0;
+    flex-direction: column;
+    background: var(--white);
+    border-right: 1px solid var(--gray-300);
+    border-bottom: 1px solid var(--gray-300);
+    transition:
+        transform 180ms ease,
+        box-shadow 180ms ease;
+}
+
+.featured-project:hover {
+    position: relative;
+    z-index: 2;
+    transform: translateY(-4px);
+    box-shadow: 0 18px 36px rgba(0, 0, 0, 0.10);
+}
+
+.featured-project-image {
+    position: relative;
+    aspect-ratio: 16 / 8;
+    overflow: hidden;
+    background: var(--gray-100);
+}
+
+.featured-project-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 350ms ease;
+}
+
+.featured-project:hover .featured-project-image img {
+    transform: scale(1.025);
+}
+
+.featured-project-badge {
+    position: absolute;
+    top: 16px;
+    left: 16px;
+    padding: 6px 10px;
+    background: rgba(255, 255, 255, 0.94);
+    color: var(--black);
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.10em;
+    text-transform: uppercase;
+}
+
+.featured-project-content {
+    display: flex;
+    min-height: 320px;
+    flex: 1;
+    flex-direction: column;
+    padding: 28px 30px 30px;
+}
+
+.featured-project-number {
+    display: block;
+    margin-bottom: 25px;
+    color: var(--gray-500);
+    font-size: 11px;
+}
+
+.featured-project-content h3 {
+    margin-bottom: 16px;
+    font-size: clamp(21px, 2vw, 27px);
+    font-weight: 500;
+    line-height: 1.18;
+    letter-spacing: -0.02em;
+}
+
+.featured-project-content p {
+    margin-bottom: 28px;
+    color: var(--gray-700);
+    font-size: 14px;
+}
+
+.featured-project-link {
+    margin-top: auto;
+    padding-top: 18px;
+    border-top: 1px solid var(--gray-200);
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+}
+
+@media (max-width: 800px) {
+    .featured-projects {
+        grid-template-columns: 1fr;
+    }
+
+    .featured-project-content {
+        min-height: auto;
+    }
+}
