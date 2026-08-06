@@ -89,13 +89,19 @@ const openStreetMap = L.tileLayer(
                 }).addTo(map);
 
                 map.fitBounds(canastra.getBounds(), { padding: [22, 22] });
-                L.control.layers(
-                    { 'OpenTopoMap': openTopoMap, 'OpenStreetMap': openStreetMap },
-                    { 'Área da Canastra': canastra },
-                    { collapsed: false }
-                ).addTo(map);
-                L.control.scale({ imperial: false }).addTo(map);
-                document.getElementById('mapStatus').remove();
+               L.control.layers(
+    {
+        'Imagem de satélite — Esri': esriSatelite,
+        'OpenStreetMap': openStreetMap,
+        'OpenTopoMap': openTopoMap
+    },
+    {
+        'Área da Canastra': canastra
+    },
+    {
+        collapsed: false
+    }
+).addTo(map);
             })
             .catch(error => {
                 const status = document.getElementById('mapStatus');
