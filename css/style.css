@@ -1957,3 +1957,25 @@ html {
         width: 100%;
     }
 }
+.intro-institution {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.intro-institution-logos {
+    width: 88px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+    flex: 0 0 auto;
+}
+
+.intro-ufu-logo,
+.intro-igesc-logo {
+    width: 100%;
+    max-height: 25px;
+    object-fit: contain;
+    object-position: left center;
+}
