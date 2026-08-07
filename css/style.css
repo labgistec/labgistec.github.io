@@ -1979,3 +1979,15 @@ html {
     object-fit: contain;
     object-position: left center;
 }
+
+.hero-logo-panel {
+    flex-direction: column;
+    gap: 28px;
+}
+
+.hero-gistec-logo {
+    width: min(260px, 100%);
+}
+
+.hero-affiliations {
+
