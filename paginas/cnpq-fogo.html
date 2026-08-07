@@ -1,550 +1,579 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="pt-BR">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Mapa interativo e informações sobre o Projeto CNPq Fogo.">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Mapa interativo e informações sobre o Projeto CNPq Fogo."
+    />
 
     <title>Projeto CNPq Fogo | GISTEC</title>
 
-    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/style.css?v=21" />
 
     <style>
-       .project-page {
-    padding: 42px 0 70px;
-}
+      .project-page {
+        padding: 42px 0 70px;
+      }
 
-        .project-return {
-            display: inline-block;
-            margin-bottom: 45px;
-            color: #333333;
-            text-decoration: none;
-        }
+      .project-return {
+        display: inline-block;
+        margin-bottom: 45px;
+        color: #333333;
+        text-decoration: none;
+      }
 
-        .project-return:hover {
-            text-decoration: underline;
-        }
+      .project-return:hover {
+        text-decoration: underline;
+      }
 
+      .project-heading {
+        display: grid;
+        grid-template-columns: 1.25fr 0.75fr;
+        gap: 64px;
+        align-items: stretch;
+        margin-bottom: 30px;
+      }
+
+      .project-label {
+        margin-bottom: 15px;
+        font-size: 0.8rem;
+        font-weight: 600;
+        letter-spacing: 0.18em;
+        text-transform: uppercase;
+      }
+
+      .project-heading h1 {
+        margin: 0;
+        max-width: 820px;
+        font-size: clamp(1.6rem, 1.8vw, 2rem);
+        font-weight: 500;
+        text-align: justify;
+        line-height: 1.18;
+        letter-spacing: -0.02em;
+      }
+
+      .project-details {
+        margin-top: 0;
+        padding: 18px 22px;
+        height: 100%;
+        box-sizing: border-box;
+        background: #fafaf8;
+        border: 1px solid #ddddda;
+        box-shadow: 0 16px 40px rgba(0, 0, 0, 0.04);
+      }
+
+      .project-details h2 {
+        margin: 0 0 10px;
+        font-size: 1.15rem;
+      }
+
+      .project-funder-logo {
+        width: auto;
+        max-width: 104px;
+        max-height: 36px;
+        margin: 0 0 10px;
+        object-fit: contain;
+        object-position: left center;
+      }
+
+      .project-details dl {
+        margin: 0;
+      }
+
+      .project-details dl div {
+        padding: 6px 0;
+        border-bottom: 1px solid #e4e4e4;
+      }
+
+      .project-details dl div:last-child {
+        border-bottom: 0;
+      }
+
+      .project-details dt {
+        margin-bottom: 1px;
+        color: #666666;
+        font-size: 0.72rem;
+        font-weight: 600;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+      }
+
+      .project-details dd {
+        margin: 0;
+        font-size: 0.88rem;
+        line-height: 1.3;
+      }
+
+      .project-summary {
+        max-width: 1000px;
+        margin-bottom: 24px;
+        padding-bottom: 18px;
+        border-bottom: 1px solid #d8d8d8;
+      }
+
+      .project-summary h2,
+      .project-team-header h2,
+      .project-map-title {
+        margin: 0 0 20px;
+        font-size: 1.3rem;
+        font-weight: 500;
+      }
+
+      .project-summary p {
+        margin: 0 0 18px;
+        color: #3f3f3f;
+        font-size: 1rem;
+        text-align: justify;
+        line-height: 1.5;
+      }
+
+      .project-team {
+        margin: 0 0 80px;
+      }
+
+      .project-team-header {
+        margin-bottom: 30px;
+      }
+
+      .team-coordinator {
+        display: grid;
+        grid-template-columns: minmax(220px, 0.7fr) 1.3fr;
+        gap: 30px;
+        align-items: end;
+
+        margin-bottom: 50px;
+        padding: 24px 0;
+
+        color: #111111;
+        background: transparent;
+
+        border-top: 1px solid #cccccc;
+        border-bottom: 1px solid #cccccc;
+      }
+
+      .team-coordinator span {
+        color: #666666;
+      }
+
+      .team-coordinator h3 {
+        margin: 0 0 8px;
+        font-size: 1.4rem;
+        font-weight: 500;
+      }
+
+      .team-coordinator p {
+        margin: 4px 0;
+        color: #555555;
+      }
+      .team-group {
+        margin-top: 46px;
+      }
+
+      .team-group > h3 {
+        margin-bottom: 0;
+        padding-bottom: 14px;
+        border-bottom: 2px solid #222222;
+        font-size: 1.15rem;
+        font-weight: 600;
+      }
+
+      .team-grid {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        column-gap: 34px;
+      }
+
+      .team-card {
+        padding: 20px 0;
+        background: transparent;
+        border-bottom: 1px solid #dddddd;
+      }
+
+      .team-card h4 {
+        margin: 0 0 10px;
+        font-size: 1.05rem;
+        font-weight: 600;
+      }
+
+      .team-card p {
+        margin: 3px 0;
+        color: #555555;
+        font-size: 0.9rem;
+        line-height: 1.5;
+      }
+
+      .project-map-heading {
+        margin-bottom: 24px;
+        padding-top: 42px;
+        border-top: 1px solid #cccccc;
+      }
+
+      .project-map-title {
+        margin-top: 0;
+      }
+
+      .project-map-description {
+        max-width: 720px;
+        margin: -8px 0 0;
+        color: #555555;
+        line-height: 1.65;
+      }
+
+      .project-map {
+        display: block;
+        width: 100%;
+        height: 720px;
+        border: 1px solid #dddddd;
+      }
+
+      @media (max-width: 900px) {
         .project-heading {
-            display: grid;
-            grid-template-columns: 1.25fr 0.75fr;
-            gap: 64px;
-            align-items: start;
-            margin-bottom: 30px;
-          
-        }
-
-        .project-label {
-            margin-bottom: 15px;
-            font-size: 0.8rem;
-            font-weight: 600;
-            letter-spacing: 0.18em;
-            text-transform: uppercase;
-        }
-
-     .project-heading h1 {
-    margin: 0;
-    max-width: 820px;
-    font-size: clamp(1.6rem, 1.8vw, 2rem);
-    font-weight: 500;
-    text-align: justify;
-    line-height: 1.18;
-    letter-spacing: -0.02em;
-}
+          grid-template-columns: 1fr;
+          gap: 35px;
         }
 
         .project-details {
-            padding: 26px;
-            background: #fafaf8;
-            border: 1px solid #ddddda;
-            box-shadow: 0 16px 40px rgba(0, 0, 0, 0.04);
-        }
-
-        .project-details h2 {
-            margin: 0 0 20px;
-            font-size: 1.35rem;
-        }
-
-        .project-details dl {
-            margin: 0;
-        }
-
-        .project-details dl div {
-            padding: 10px 0;
-            border-bottom: 1px solid #e4e4e4;
-        }
-
-        .project-details dl div:last-child {
-            border-bottom: 0;
-        }
-
-        .project-details dt {
-            margin-bottom: 4px;
-            color: #666666;
-            font-size: 0.72rem;
-            font-weight: 600;
-            letter-spacing: 0.08em;
-            text-transform: uppercase;
-        }
-
-        .project-details dd {
-            margin: 0;
-            font-size: 0.95rem;
-            line-height: 1.5;
-        }
-
-       .project-summary {
-    max-width: 1000px;
-   margin-bottom: 24px;
-padding-bottom: 18px;
-    border-bottom: 1px solid #d8d8d8;
-}
-
-        .project-summary h2,
-        .project-team-header h2,
-        .project-map-title {
-            margin: 0 0 20px;
-            font-size: 1.3rem;
-            font-weight: 500;
-        }
-
-        .project-summary p {
-            margin: 0 0 18px;
-            color: #3f3f3f;
-            font-size: 1.0rem;
-            text-align: justify;
-            line-height: 1.5;
-        }
-
-        .project-team {
-            margin: 0 0 80px;
-        }
-
-        .project-team-header {
-            margin-bottom: 30px;
-        }
-
-       .team-coordinator {
-    display: grid;
-    grid-template-columns: minmax(220px, 0.7fr) 1.3fr;
-    gap: 30px;
-    align-items: end;
-
-    margin-bottom: 50px;
-    padding: 24px 0;
-
-    color: #111111;
-    background: transparent;
-
-    border-top: 1px solid #cccccc;
-    border-bottom: 1px solid #cccccc;
-}
-
-      .team-coordinator span {
-    color: #666666;
-}
-
-.team-coordinator h3 {
-    margin: 0 0 8px;
-    font-size: 1.4rem;
-    font-weight: 500;
-}
-
-.team-coordinator p {
-    margin: 4px 0;
-    color: #555555;
-}
-        .team-group {
-            margin-top: 46px;
-        }
-
-        .team-group > h3 {
-            margin-bottom: 0;
-            padding-bottom: 14px;
-            border-bottom: 2px solid #222222;
-            font-size: 1.15rem;
-            font-weight: 600;
+          margin-top: 0;
         }
 
         .team-grid {
-            display: grid;
-            grid-template-columns: repeat(2, minmax(0, 1fr));
-            column-gap: 34px;
+          grid-template-columns: 1fr;
         }
 
-        .team-card {
-            padding: 20px 0;
-            background: transparent;
-            border-bottom: 1px solid #dddddd;
+        .team-coordinator {
+          grid-template-columns: 1fr;
+          gap: 12px;
+        }
+      }
+
+      @media (max-width: 600px) {
+        .project-page {
+          padding: 45px 0;
         }
 
-        .team-card h4 {
-            margin: 0 0 10px;
-            font-size: 1.05rem;
-            font-weight: 600;
-        }
-
-        .team-card p {
-            margin: 3px 0;
-            color: #555555;
-            font-size: 0.9rem;
-            line-height: 1.5;
-        }
-
-        .project-map-heading {
-            margin-bottom: 24px;
-            padding-top: 42px;
-            border-top: 1px solid #cccccc;
-        }
-
-        .project-map-title {
-            margin-top: 0;
-        }
-
-        .project-map-description {
-            max-width: 720px;
-            margin: -8px 0 0;
-            color: #555555;
-            line-height: 1.65;
+        .project-heading h1 {
+          font-size: 2rem;
         }
 
         .project-map {
-            display: block;
-            width: 100%;
-            height: 720px;
-            border: 1px solid #dddddd;
+          height: 600px;
         }
+      }
+      .project-hero-image {
+        display: block;
+        width: 100%;
+        height: 230px;
+        object-fit: cover;
+        object-position: center 70%;
+        box-sizing: border-box;
 
-        @media (max-width: 900px) {
-            .project-heading {
-                grid-template-columns: 1fr;
-                gap: 35px;
-            }
+        margin-top: 16px;
+        padding: 0;
+        border: none;
+        background: transparent;
 
-            .team-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .team-coordinator {
-                grid-template-columns: 1fr;
-                gap: 12px;
-            }
-        }
-
-        @media (max-width: 600px) {
-            .project-page {
-                padding: 45px 0;
-            }
-
-            .project-heading h1 {
-                font-size: 2rem;
-            }
-
-            .project-map {
-                height: 600px;
-            }
-        }
-    .project-hero-image {
-    display: block;
-    width: 100%;
-    height: 230px;
-    object-fit: cover;
-    object-position: center 70%;
-    box-sizing: border-box;
-
-    margin-top: 16px;
-    padding: 0;
-    border: none;
-    background: transparent;
-
-    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.08);
-}
+        box-shadow: 0 12px 30px rgba(0, 0, 0, 0.08);
+      }
     </style>
-</head>
+  </head>
 
-<body>
+  <body>
     <header class="site-header">
-        <div class="container header-content">
-            <a class="brand" href="../index.html" aria-label="Página inicial do GISTEC">
-                <img src="../imagens/logo.png" alt="Logo GISTEC" class="brand-logo">
+      <div class="container header-content">
+        <a
+          class="brand"
+          href="../index.html"
+          aria-label="Página inicial do GISTEC"
+        >
+          <img src="../imagens/logo.png" alt="Logo GISTEC" class="brand-logo" />
 
-                <div class="brand-copy">
-                    <strong>GISTEC</strong>
-                    <span>Geoinformação, Território e Conservação</span>
-                </div>
-            </a>
+          <div class="brand-copy">
+            <strong>GISTEC</strong>
+            <span>Geoinformação, Território e Conservação</span>
+          </div>
+        </a>
 
-            <nav class="main-menu" aria-label="Navegação principal">
-                <a href="../index.html">Início</a>
-                <a href="../index.html#projetos">Projetos</a>
-                <a href="../index.html#mapas">Mapas</a>
-                <a href="../index.html#dados">Dados</a>
-                <a href="../index.html#publicacoes">Publicações</a>
-            </nav>
-        </div>
+        <nav class="main-menu" aria-label="Navegação principal">
+          <a href="../index.html">Início</a>
+          <a href="../index.html#projetos">Projetos</a>
+          <a href="../index.html#mapas">Mapas</a>
+          <a href="../index.html#dados">Dados</a>
+          <a href="../index.html#publicacoes">Publicações</a>
+          <a href="equipe.html">Equipe</a>
+        </nav>
+      </div>
     </header>
-<main class="project-page">
-        <div class="container">
+    <main class="project-page">
+      <div class="container">
+        <div class="project-heading">
+          <div>
+            <p class="project-label">Projeto CNPq</p>
 
-            <div class="project-heading">
-                <div>
-                    <p class="project-label">Projeto CNPq</p>
+            <h1>
+              As causas e as consequências da recorrência de incêndios e
+              queimadas no Cerrado Mineiro e suas relações com as práticas
+              agrícolas
+            </h1>
+            <img
+              class="project-hero-image"
+              src="../imagens/cnpq-fogo-nbr-rgb-wide.png"
+              alt="Comparação entre imagens NBR e RGB da área de interesse do projeto"
+            />
+          </div>
 
-                    <h1>
-                        As causas e as consequências da recorrência de incêndios
-                        e queimadas no Cerrado Mineiro e suas relações com as
-                        práticas agrícolas
-                    </h1>
-                    <img
-    class="project-hero-image"
-    src="../imagens/cnpq-fogo-nbr-rgb-wide.png"
-    alt="Comparação entre imagens NBR e RGB da área de interesse do projeto">
-                </div>
+          <aside class="project-details" aria-label="Informações do projeto">
+            <img
+              class="project-funder-logo"
+              src="../imagens/cnpq-logo.png"
+              alt="CNPq"
+            />
+            <h2>Informações do projeto</h2>
 
-                <aside class="project-details" aria-label="Informações do projeto">
-                    <h2>Informações do projeto</h2>
+            <dl>
+              <div>
+                <dt>Processo nº</dt>
+                <dd>402815/2025-4</dd>
+              </div>
 
-                    <dl>
-                        <div>
-                            <dt>Processo nº</dt>
-                            <dd>402815/2025-4</dd>
-                        </div>
+              <div>
+                <dt>Modalidade</dt>
+                <dd>APQ</dd>
+              </div>
 
-                        <div>
-                            <dt>Modalidade</dt>
-                            <dd>APQ</dd>
-                        </div>
+              <div>
+                <dt>Coordenador</dt>
+                <dd>João Vitor Meza Bravo</dd>
+              </div>
 
-                        <div>
-                            <dt>Coordenador</dt>
-                            <dd>João Vitor Meza Bravo</dd>
-                        </div>
+              <div>
+                <dt>Vigência</dt>
+                <dd>18/11/2025 a 30/11/2028 — 36 meses</dd>
+              </div>
 
-                        <div>
-                            <dt>Vigência</dt>
-                            <dd>18/11/2025 a 30/11/2028 — 36 meses</dd>
-                        </div>
-
-                        <div>
-                            <dt>Instituição</dt>
-                            <dd>Universidade Federal de Uberlândia</dd>
-                        </div>
-                    </dl>
-                </aside>
-            </div>
-
-            <section class="project-summary">
-                <h2>Resumo do projeto</h2>
-
-                <p>
-                    Na paisagem do Cerrado, é comum observar a existência de regiões
-                    que, com frequência indesejada, são atingidas por incêndios e
-                    queimadas. Prevenir ou amenizar os impactos desses fenômenos
-                    relacionados ao fogo é importante para o desenvolvimento sustentável
-                    e para a conservação da vida no bioma. Os incêndios e queimadas que
-                    ocorrem no ambiente rural do Cerrado afetam negativamente os solos
-                    e a atmosfera, colocam em risco vidas humanas e de animais silvestres,
-                    fragmentam as florestas nativas e ocasionam prejuízos econômicos e
-                    ambientais. Com essa perspectiva, elaborou-se este projeto para compreender as
-                    relações entre a ocorrência de incêndios, queimadas e as práticas
-                    agrícolas existentes na paisagem de uma porção do Cerrado Mineiro,
-                    especificamente a região de atuação do 2º Comando Operacional de
-                    Bombeiros. Pretende-se, ainda, associar a ocorrência de incêndios e
-                    queimadas em áreas de recorrência aos diferentes tipos de manejo
-                    agrícola. As áreas de recorrência correspondem às regiões nas quais,
-                    ao longo de determinado intervalo temporal, ocorre a instalação
-                    preferencial e repetida de eventos de incêndios e queimadas. Essas regiões possuem destacada importância, uma vez que demandam
-                    atenção especial dos bombeiros militares. Portanto, diagnosticar as
-                    causas e as consequências dos incêndios e queimadas em áreas de
-                    recorrência permite construir ações de prevenção e mitigação mais
-                    eficientes, reduzindo os riscos e prejuízos à sociedade. Ademais,
-                    reconhecer e mapear essas regiões, compreendendo a dinâmica
-                    espaço-temporal da ignição, da propagação e do desenvolvimento dos
-                    eventos, possibilita ampliar o conhecimento científico sobre
-                    fenômenos catastróficos relacionados ao fogo. Dessa maneira, os
-                    resultados deste projeto contribuirão para o monitoramento e a
-                    prevenção de desastres relacionados aos incêndios e queimadas que
-                    ocorrem em regiões com intensa prática agrícola.
-                </p>
-            </section>
-
-            <section class="project-team">
-                <div class="project-team-header">
-                    <p class="project-label">Pessoas</p>
-                    <h2>Equipe do projeto</h2>
-                </div>
-
-                <article class="team-coordinator">
-                    <div>
-                        <span>Coordenação</span>
-                        <h3>João Vitor Meza Bravo</h3>
-                    </div>
-
-                    <div>
-                        <p>Coordenador do projeto</p>
-                        <p>Universidade Federal de de Uberlândia</p>
-                    </div>
-                </article>
-
-                <div class="team-group">
-                    <h3>Pesquisadores</h3>
-
-                    <div class="team-grid">
-                        <article class="team-card">
-                            <span>Pesquisador</span>
-                            <h4>Boscolli Barbosa Pereira</h4>
-                            <p>Universidade Federal de Uberlândia</p>
-                        </article>
-
-                        <article class="team-card">
-                            <span>Pesquisador</span>
-                            <h4>Gabriel Henrique de Almeida Pereira</h4>
-                            <p>Instituto Tecnológico SIMEPAR</p>
-                        </article>
-
-                        <article class="team-card">
-                            <span>Pesquisador</span>
-                            <h4>Haendell Luiz Silva Costa</h4>
-                            <p>Corpo de Bombeiros Militar de Minas Gerais</p>
-                        </article>
-
-                        <article class="team-card">
-                            <span>Pesquisador</span>
-                            <h4>Jorge Luís Silva Brito</h4>
-                            <p>Universidade Federal de Uberlândia</p>
-                        </article>
-
-                        <article class="team-card">
-                            <span>Pesquisador</span>
-                            <h4>Milton Serpa de Meira Junior</h4>
-                            <p>Universidade Federal de Uberlândia</p>
-                        </article>
-
-                        <article class="team-card">
-                            <span>Pesquisadora</span>
-                            <h4>Silvana Philippi Camboim</h4>
-                            <p>Universidade Federal do Paraná</p>
-                        </article>
-
-                        <article class="team-card">
-                            <span>Pesquisador</span>
-                            <h4>Sílvio Carlos Rodrigues</h4>
-                            <p>Universidade Federal de Uberlândia</p>
-                        </article>
-
-                        <article class="team-card">
-                            <span>Pesquisador</span>
-                            <h4>Vinícius de Lima Dantas</h4>
-                            <p>Universidade Federal de Uberlândia</p>
-                        </article>
-                    </div>
-                </div>
-
-                <div class="team-group">
-                    <h3>Pesquisadores internacionais</h3>
-
-                    <div class="team-grid">
-                        <article class="team-card">
-                            <span>Pesquisador internacional</span>
-                            <h4>António Bento Gonçalves</h4>
-                            <p>Universidade do Minho</p>
-                        </article>
-
-                        <article class="team-card">
-                            <span>Pesquisador internacional</span>
-                            <h4>Javier Úbeda Cartaña</h4>
-                            <p>Universitat de Barcelona</p>
-                        </article>
-
-                        <article class="team-card">
-                            <span>Pesquisador internacional</span>
-                            <h4>José Manuel Fernandes Rocha</h4>
-                            <p>Universidade do Porto</p>
-                        </article>
-                    </div>
-                </div>
-
-                <div class="team-group">
-                    <h3>Estudantes</h3>
-
-                    <div class="team-grid">
-                        <article class="team-card">
-                            <span>Doutoranda</span>
-                            <h4>Beatriz Bomfim Santos</h4>
-                            <p>Universidade Federal de Uberlândia</p>
-                        </article>
-
-                        <article class="team-card">
-                            <span>Doutoranda</span>
-                            <h4>Laura Cristina Moura Xavier</h4>
-                            <p>Universidade Federal de Uberlândia</p>
-                        </article>
-
-                        <article class="team-card">
-                            <span>Doutorando</span>
-                            <h4>Mateus Duarte Segismundo</h4>
-                            <p>Universidade Federal de Uberlândia</p>
-                        </article>
-
-                        <article class="team-card">
-                            <span>Graduando</span>
-                            <h4>João Guilherme Amitrano Almada</h4>
-                            <p>Universidade Federal de Uberlândia</p>
-                        </article>
-
-                        <article class="team-card">
-                            <span>Mestrando</span>
-                            <h4>Guilherme Souza de Aquino</h4>
-                            <p>Universidade Federal de Uberlândia</p>
-                        </article>
-                    </div>
-                </div>
-            </section>
-
-            <div class="project-map-heading">
-                <p class="project-label">Cartografia interativa</p>
-                <h2 class="project-map-title">
-                    Área de interesse do projeto e dados
-                </h2>
-
-                <p class="project-map-description">
-                    Explore a área de atuação do projeto e consulte as camadas
-                    de dados disponíveis no mapa interativo.
-                </p>
-            </div>
-
-            <iframe
-                class="project-map"
-                src="../mapas/projeto-fogo-cnpq/index.html"
-                title="Área de interesse do Projeto CNPq Fogo"
-                loading="lazy"
-                allowfullscreen>
-            </iframe>
+              <div>
+                <dt>Instituição</dt>
+                <dd>Universidade Federal de Uberlândia</dd>
+              </div>
+            </dl>
+          </aside>
         </div>
+
+        <section class="project-summary">
+          <h2>Resumo do projeto</h2>
+
+          <p>
+            Na paisagem do Cerrado, é comum observar a existência de regiões
+            que, com frequência indesejada, são atingidas por incêndios e
+            queimadas. Prevenir ou amenizar os impactos desses fenômenos
+            relacionados ao fogo é importante para o desenvolvimento sustentável
+            e para a conservação da vida no bioma. Os incêndios e queimadas que
+            ocorrem no ambiente rural do Cerrado afetam negativamente os solos e
+            a atmosfera, colocam em risco vidas humanas e de animais silvestres,
+            fragmentam as florestas nativas e ocasionam prejuízos econômicos e
+            ambientais. Com essa perspectiva, elaborou-se este projeto para
+            compreender as relações entre a ocorrência de incêndios, queimadas e
+            as práticas agrícolas existentes na paisagem de uma porção do
+            Cerrado Mineiro, especificamente a região de atuação do 2º Comando
+            Operacional de Bombeiros. Pretende-se, ainda, associar a ocorrência
+            de incêndios e queimadas em áreas de recorrência aos diferentes
+            tipos de manejo agrícola. As áreas de recorrência correspondem às
+            regiões nas quais, ao longo de determinado intervalo temporal,
+            ocorre a instalação preferencial e repetida de eventos de incêndios
+            e queimadas. Essas regiões possuem destacada importância, uma vez
+            que demandam atenção especial dos bombeiros militares. Portanto,
+            diagnosticar as causas e as consequências dos incêndios e queimadas
+            em áreas de recorrência permite construir ações de prevenção e
+            mitigação mais eficientes, reduzindo os riscos e prejuízos à
+            sociedade. Ademais, reconhecer e mapear essas regiões, compreendendo
+            a dinâmica espaço-temporal da ignição, da propagação e do
+            desenvolvimento dos eventos, possibilita ampliar o conhecimento
+            científico sobre fenômenos catastróficos relacionados ao fogo. Dessa
+            maneira, os resultados deste projeto contribuirão para o
+            monitoramento e a prevenção de desastres relacionados aos incêndios
+            e queimadas que ocorrem em regiões com intensa prática agrícola.
+          </p>
+        </section>
+
+        <section class="project-team">
+          <div class="project-team-header">
+            <p class="project-label">Pessoas</p>
+            <h2>Equipe do projeto</h2>
+          </div>
+
+          <article class="team-coordinator">
+            <div>
+              <span>Coordenação</span>
+              <h3>João Vitor Meza Bravo</h3>
+            </div>
+
+            <div>
+              <p>Coordenador do projeto</p>
+              <p>Universidade Federal de de Uberlândia</p>
+            </div>
+          </article>
+
+          <div class="team-group">
+            <h3>Pesquisadores</h3>
+
+            <div class="team-grid">
+              <article class="team-card">
+                <span>Pesquisador</span>
+                <h4>Boscolli Barbosa Pereira</h4>
+                <p>Universidade Federal de Uberlândia</p>
+              </article>
+
+              <article class="team-card">
+                <span>Pesquisador</span>
+                <h4>Gabriel Henrique de Almeida Pereira</h4>
+                <p>Instituto Tecnológico SIMEPAR</p>
+              </article>
+
+              <article class="team-card">
+                <span>Pesquisador</span>
+                <h4>Haendell Luiz Silva Costa</h4>
+                <p>Corpo de Bombeiros Militar de Minas Gerais</p>
+              </article>
+
+              <article class="team-card">
+                <span>Pesquisador</span>
+                <h4>Jorge Luís Silva Brito</h4>
+                <p>Universidade Federal de Uberlândia</p>
+              </article>
+
+              <article class="team-card">
+                <span>Pesquisador</span>
+                <h4>Milton Serpa de Meira Junior</h4>
+                <p>Universidade Federal de Uberlândia</p>
+              </article>
+
+              <article class="team-card">
+                <span>Pesquisadora</span>
+                <h4>Silvana Philippi Camboim</h4>
+                <p>Universidade Federal do Paraná</p>
+              </article>
+
+              <article class="team-card">
+                <span>Pesquisador</span>
+                <h4>Sílvio Carlos Rodrigues</h4>
+                <p>Universidade Federal de Uberlândia</p>
+              </article>
+
+              <article class="team-card">
+                <span>Pesquisador</span>
+                <h4>Vinícius de Lima Dantas</h4>
+                <p>Universidade Federal de Uberlândia</p>
+              </article>
+            </div>
+          </div>
+
+          <div class="team-group">
+            <h3>Pesquisadores internacionais</h3>
+
+            <div class="team-grid">
+              <article class="team-card">
+                <span>Pesquisador internacional</span>
+                <h4>António Bento Gonçalves</h4>
+                <p>Universidade do Minho</p>
+              </article>
+
+              <article class="team-card">
+                <span>Pesquisador internacional</span>
+                <h4>Javier Úbeda Cartaña</h4>
+                <p>Universitat de Barcelona</p>
+              </article>
+
+              <article class="team-card">
+                <span>Pesquisador internacional</span>
+                <h4>José Manuel Fernandes Rocha</h4>
+                <p>Universidade do Porto</p>
+              </article>
+            </div>
+          </div>
+
+          <div class="team-group">
+            <h3>Estudantes</h3>
+
+            <div class="team-grid">
+              <article class="team-card">
+                <span>Doutoranda</span>
+                <h4>Beatriz Bomfim Santos</h4>
+                <p>Universidade Federal de Uberlândia</p>
+              </article>
+
+              <article class="team-card">
+                <span>Doutoranda</span>
+                <h4>Laura Cristina Moura Xavier</h4>
+                <p>Universidade Federal de Uberlândia</p>
+              </article>
+
+              <article class="team-card">
+                <span>Doutorando</span>
+                <h4>Mateus Duarte Segismundo</h4>
+                <p>Universidade Federal de Uberlândia</p>
+              </article>
+
+              <article class="team-card">
+                <span>Graduando</span>
+                <h4>João Guilherme Amitrano Almada</h4>
+                <p>Universidade Federal de Uberlândia</p>
+              </article>
+
+              <article class="team-card">
+                <span>Mestrando</span>
+                <h4>Guilherme Souza de Aquino</h4>
+                <p>Universidade Federal de Uberlândia</p>
+              </article>
+            </div>
+          </div>
+        </section>
+
+        <div class="project-map-heading">
+          <p class="project-label">Cartografia interativa</p>
+          <h2 class="project-map-title">
+            Área de interesse do projeto e dados
+          </h2>
+
+          <p class="project-map-description">
+            Explore a área de atuação do projeto e consulte as camadas de dados
+            disponíveis no mapa interativo.
+          </p>
+        </div>
+
+        <iframe
+          class="project-map"
+          src="../mapas/projeto-fogo-cnpq/index.html"
+          title="Área de interesse do Projeto CNPq Fogo"
+          loading="lazy"
+          allowfullscreen
+        >
+        </iframe>
+      </div>
     </main>
 
     <footer class="site-footer">
-        <div class="container footer-grid">
-            <div class="footer-brand">
-                <img src="../imagens/logo.png" alt="Logo GISTEC">
+      <div class="container footer-grid">
+        <div class="footer-brand">
+          <img src="../imagens/logo.png" alt="Logo GISTEC" />
 
-                <div>
-                    <strong>GISTEC</strong>
-                    <span>Geoinformação, Território e Conservação</span>
-                </div>
-            </div>
-
-            <div>
-                <strong>Instituição</strong>
-                <p>Universidade Federal de Uberlândia</p>
-                <p>Instituto de Geografia, Geociências e Saúde Coletiva</p>
-            </div>
-
-            <div>
-                <strong>Projeto</strong>
-                <p>CNPq Fogo</p>
-            </div>
+          <div>
+            <strong>GISTEC</strong>
+            <span>Geoinformação, Território e Conservação</span>
+          </div>
         </div>
+
+        <div>
+          <strong>Instituição</strong>
+          <p>Universidade Federal de Uberlândia</p>
+          <p>Instituto de Geografia, Geociências e Saúde Coletiva</p>
+        </div>
+
+        <div>
+          <strong>Projeto</strong>
+          <p>CNPq Fogo</p>
+        </div>
+      </div>
     </footer>
-</body>
+  </body>
 </html>

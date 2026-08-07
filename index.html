@@ -1,576 +1,523 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="pt-BR">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="GISTEC — Geoinformação, Território e Conservação">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="GISTEC — Geoinformação, Território e Conservação"
+    />
     <title>GISTEC | Geoinformação, Território e Conservação</title>
-    <link rel="stylesheet" href="css/style.css?v=20">
+    <link rel="stylesheet" href="css/style.css?v=21" />
     <link
-    rel="stylesheet"
-    href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
->
-</head>
+      rel="stylesheet"
+      href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+    />
+  </head>
 
-<body>
+  <body>
     <header class="site-header">
-        <div class="container header-content">
-            <a class="brand" href="index.html" aria-label="Página inicial do GISTEC">
-                <img src="imagens/logo.png" alt="Logo GISTEC" class="brand-logo">
-                <div class="brand-copy">
-                    <strong>GISTEC</strong>
-                    <span>Geoinformação, Território e Conservação</span>
-                </div>
-            </a>
+      <div class="container header-content">
+        <a
+          class="brand"
+          href="index.html"
+          aria-label="Página inicial do GISTEC"
+        >
+          <img src="imagens/logo.png" alt="Logo GISTEC" class="brand-logo" />
+          <div class="brand-copy">
+            <strong>GISTEC</strong>
+            <span>Geoinformação, Território e Conservação</span>
+          </div>
+        </a>
 
-            <button class="menu-button" id="menuButton" type="button"
-                    aria-label="Abrir menu" aria-expanded="false">
-                Menu
-            </button>
+        <button
+          class="menu-button"
+          id="menuButton"
+          type="button"
+          aria-label="Abrir menu"
+          aria-expanded="false"
+        >
+          Menu
+        </button>
 
-          <nav class="main-menu" id="mainMenu" aria-label="Navegação principal">
-   <a href="index.html">Início</a>
+        <nav class="main-menu" id="mainMenu" aria-label="Navegação principal">
+          <a href="index.html">Início</a>
 
-    <div class="menu-dropdown">
-        <a href="#projetos">Projetos</a>
+          <div class="menu-dropdown">
+            <a href="#projetos">Projetos</a>
 
-        <div class="menu-dropdown-content">
-            <a href="paginas/cnpq-fogo.html">CNPq Fogo</a>
-            <a href="paginas/fapemig-fogo.html">Fapemig Fogo</a>
-        </div>
-    </div>
+            <div class="menu-dropdown-content">
+              <a href="paginas/cnpq-fogo.html">CNPq Fogo</a>
+              <a href="paginas/fapemig-fogo.html">Fapemig Fogo</a>
+            </div>
+          </div>
 
-    <a href="#dados">Dados</a>
-    <a href="#publicacoes">Publicações</a>
-    <a href="#cursos">Cursos</a>
-    <a href="#equipe">Equipe</a>
-</nav>
-        </div>
+          <a href="#dados">Dados</a>
+          <a href="#publicacoes">Publicações</a>
+          <a href="#cursos">Cursos</a>
+          <a href="paginas/equipe.html">Equipe</a>
+        </nav>
+      </div>
     </header>
 
     <main>
-        <section class="hero" id="inicio">
-            <div class="container hero-grid">
-                <div class="hero-content">
-                    <p class="section-label">Grupo de pesquisa</p>
-                    <h1>Geoinformação, Território e Conservação</h1>
-                    <p class="hero-text">
-                        O GISTEC é um grupo de pesquisa sediado na Universidade Federal de Uberlandia que
-                        reúne pesquisadores e estudantes de diferentes instituições brasileiras e estrangeiras, dedicados à pesquisa, ensino e extensão em geoinformação, geografia física, análise territorial, conservação e saúde ambiental.
-                    </p>
-
-                    <div class="hero-actions">
-                        <a class="button button-dark" href="#projetos">Conhecer projetos</a>
-                        <a class="button button-light" href="#localizacao">Onde estamos</a>
-                    </div>
-                </div>
-
-               <div class="hero-logo-panel">
-    <img src="imagens/logo.png" alt="Identidade visual do GISTEC" class="hero-gistec-logo">
-
-    <div class="hero-affiliations">
-        <img src="imagens/UFU_LOGO.png" alt="Universidade Federal de Uberlândia">
-        <img src="imagens/logo-igesc.png" alt="Instituto de Geografia, Geociências e Saúde Coletiva">
-    </div>
-</div>
-            </div>
-        </section>
-
-        <section class="intro-strip">
-            <div class="container intro-grid">
-                <div class="intro-institution">
-       <div>
-        <strong>Universidade Federal de Uberlândia</strong>
-        <span>Instituto de Geografia, Geociências e Saúde Coletiva</span>
-    </div>
-</div>
-                <div>
-                    <strong>Áreas de atuação</strong>
-                    <span>Geoinformação, Geografia Física, Análise Territorial, Conservação e Saúde Ambiental</span>
-                </div>
-                <div>
-    <strong>Diretório dos Grupos de Pesquisa</strong>
-    <span>
-        Grupo cadastrado no DGP/CNPq
-    </span>
-
-    <a
-        class="intro-link"
-        href="http://dgp.cnpq.br/dgp/espelhogrupo/336652"
-        target="_blank"
-        rel="noopener noreferrer"
-    >
-        Consultar cadastro →
-    </a>
-</div>
-                </div>
-
-             <section class="section team-section" id="equipe">
-    <div class="container">
-        <div class="team-showcase">
-                         
-                <div class="team-directory">
-                <div class="team-directory-heading">
-                    <div>
-                        <p class="section-label">Pessoas</p>
-                        <h3>Equipe do grupo</h3>
-                    </div>
-
-                   </div>
-
-                <div class="team-directory-group">
-                    <div class="team-directory-title">
-                        <h4>Pesquisadores</h4>
-                        <span>Equipe permanente</span>
-                    </div>
-
-                    <div class="team-people">
-                        <span class="team-person">Boscolli Barbosa Pereira</span>
-                        <span class="team-person">Claudia Robbi Sluter</span>
-                        <span class="team-person">Drausio Honorio Morais</span>
-                        <span class="team-person">Fernando Luiz de Paula Santil</span>
-                        <span class="team-person">Gabriel do Nascimento Guimarães</span>
-                        <span class="team-person">Gabriel Henrique de Almeida Pereira</span>
-                        <span class="team-person">George Deroco Martins</span>
-                        <span class="team-person">Jean Ezequiel Limongi</span>
-
-                        <span class="team-person team-person-leader">
-                            João Vitor Meza Bravo
-                            <small>Líder</small>
-                        </span>
-
-                        <span class="team-person">Jorge Luís Silva Brito</span>
-                        <span class="team-person">José Manuel Fernandes Rocha</span>
-                        <span class="team-person">Milton Serpa de Meira Junior</span>
-                        <span class="team-person">Silvana Philippi Camboim</span>
-                        <span class="team-person">Sílvio Carlos Rodrigues</span>
-                        <span class="team-person">Vanderlei de Oliveira Ferreira</span>
-                    </div>
-                </div>
-
-                <div class="team-directory-group">
-                    <div class="team-directory-title">
-                        <h4>Estudantes</h4>
-                        <span>Equipe atual</span>
-                    </div>
-
-                    <div class="team-people">
-                        <span class="team-person">Ana Laura Gonzaga Zica de Gouveia</span>
-                        <span class="team-person">Beatriz Bomfim Santos</span>
-                        <span class="team-person">Eduardo de Paula Nunes</span>
-                        <span class="team-person">Gabrielle Martins Barbosa</span>
-                        <span class="team-person">Geandra Marques Carlos</span>
-                        <span class="team-person">Guilherme Gomes Silva</span>
-                        <span class="team-person">Josiane Aparecida Ancelmo Garcia</span>
-                        <span class="team-person">Laura Cristina Moura Xavier</span>
-                        <span class="team-person">Mateus Duarte Segismundo</span>
-                        <span class="team-person">Mychelle Priscila de Melo</span>
-                        <span class="team-person">Serigne Abdou Ahad Mbacke Diop</span>
-                        <span class="team-person">Jéssica Alves Ferreira Silva</span>
-                        <span class="team-person">Paloma Mansini Basso</span>
-                    </div>
-                </div>
-
-                <div class="team-directory-group team-directory-group-last">
-                    <div class="team-directory-title">
-                        <h4>Estudantes egressos</h4>
-                        <span>Trajetória do grupo</span>
-                    </div>
-
-                    <div class="team-people team-people-alumni">
-                        <span class="team-person">Ana Paula Bazilio</span>
-                        <span class="team-person">Anna Caroline Costa Fanalli</span>
-                        <span class="team-person">Arthur Duarte Vieira</span>
-                        <span class="team-person">Raphael Tosta Santana</span>
-                        <span class="team-person">Pâmela Inês de Souza Castro Abreu</span>
-                        <span class="team-person">Maria Clara Martins de Oliveira</span>
-                        <span class="team-person">Cecília de Aquino Pinto Palis</span>
-                        <span class="team-person">José Nelson do Nascimento Neto</span>
-                        <span class="team-person">Jorge Eduardo Ferreira Cunha</span>
-                        <span class="team-person">Guilherme Souza de Aquino</span>
-                        <span class="team-person">Bianca Freire</span>
-                        <span class="team-person">Bruna Aparecida Silva Dias</span>
-                        <span class="team-person">Daiane Casagrande</span>
-                        <span class="team-person">Emilly Carollyne Resende Santos</span>
-                        <span class="team-person">Estevão Pastori Garbin</span>
-                        <span class="team-person">Hérica Leonel de Paula Ramos Oliveira</span>
-                        <span class="team-person">Jefferson dos Santos Santana</span>
-                        <span class="team-person">Joelson Fernandes de Oliveira</span>
-                        <span class="team-person">Lucas Henrique Vicentini Viana de Carvalho</span>
-                        <span class="team-person">Pâmylla Kelly Carvalho Lima</span>
-                        <span class="team-person">Paula Garcia de Oliveira</span>
-                        <span class="team-person">Sthephanny Lara Silva</span>
-                        <span class="team-person">Thays Zigante Furlan Ribeiro</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-        </section>
-
-        <section class="section" id="projetos">
-            <div class="container">
-                <div class="section-heading">
-                    <div>
-                        <p class="section-label">Pesquisa</p>
-                        <h2>Projetos</h2>
-                    </div>
-                    <p>
-                        Projetos de pesquisa, extensão,
-                        inovação e formação desenvolvidos pelo grupo.
-                    </p>
-                </div>
-
-                <div class="featured-projects">
-    <!-- Projeto CNPq -->
-
-    <a
-        class="featured-project"
-        href="paginas/cnpq-fogo.html"
-        aria-label="Conhecer o Projeto CNPq Fogo"
-    >
-        <div class="featured-project-image">
-            <img
-                src="imagens/cnpq-fogo-nbr-rgb-wide.png"
-                alt="Paisagem atingida por incêndio no Cerrado Mineiro"
-            >
-
-            <span class="featured-project-badge">
-                CNPq
-            </span>
-        </div>
-
-        <div class="featured-project-content">
-            <span class="featured-project-number">
-                01
-            </span>
-
-            <h3>
-                As causas e as consequências da recorrência de
-                incêndios e queimadas no Cerrado Mineiro
-            </h3>
-
-            <p>
-                Investigação das relações entre incêndios, queimadas,
-                recorrência do fogo e práticas agrícolas na região do
-                2º Comando Operacional de Bombeiros.
+      <section class="hero" id="inicio">
+        <div class="container hero-grid">
+          <div class="hero-content">
+            <p class="section-label">Grupo de pesquisa</p>
+            <h1>Geoinformação, Território e Conservação</h1>
+            <p class="hero-text">
+              O GISTEC é um grupo de pesquisa sediado na Universidade Federal de
+              Uberlandia que reúne pesquisadores e estudantes de diferentes
+              instituições brasileiras e estrangeiras, dedicados à pesquisa,
+              ensino e extensão em geoinformação, geografia física, análise
+              territorial, conservação e saúde ambiental.
             </p>
 
-            <span class="featured-project-link">
-                Conhecer projeto →
-            </span>
-        </div>
-    </a>
-
-    <!-- Projeto FAPEMIG -->
-
-    <a
-        class="featured-project"
-        href="paginas/fapemig-fogo.html"
-        aria-label="Conhecer o Projeto FAPEMIG Fogo"
-    >
-        <div class="featured-project-image">
-            <img
-                src="imagens/canastra.JPG"
-                alt="Paisagem do Parque Nacional da Serra da Canastra"
-            >
-
-            <span class="featured-project-badge">
-                FAPEMIG
-            </span>
-        </div>
-
-        <div class="featured-project-content">
-            <span class="featured-project-number">
-                02
-            </span>
-
-            <h3>
-                Incêndios e Manejo Integrado do Fogo no Parque
-                Nacional da Serra da Canastra
-            </h3>
-
-            <p>
-                Pesquisa sobre regimes de fogo, ocorrências de
-                incêndios e estratégias de manejo integrado no
-                Parque Nacional da Serra da Canastra.
-            </p>
-
-            <span class="featured-project-link">
-                Conhecer projeto →
-            </span>
-        </div>
-    </a>
-</div>
+            <div class="hero-actions">
+              <a class="button button-dark" href="#projetos"
+                >Conhecer projetos</a
+              >
+              <a class="button button-light" href="#localizacao"
+                >Onde estamos</a
+              >
             </div>
-        </section>
+          </div>
 
-    <section class="section section-soft" id="localizacao">
-    <div class="container">
-        <div class="section-heading">
+          <div class="hero-logo-panel">
+            <img
+              src="imagens/logo.png"
+              alt="Identidade visual do GISTEC"
+              class="hero-gistec-logo"
+            />
+          </div>
+        </div>
+
+        <div
+          class="container affiliation-band"
+          aria-label="Instituições vinculadas ao GISTEC"
+        >
+          <div class="affiliation-group affiliation-institutions">
+            <span>Instituições</span>
+            <div class="affiliation-logos">
+              <img
+                src="imagens/UFU_LOGO.png"
+                alt="Universidade Federal de Uberlândia"
+                class="logo-ufu"
+              />
+              <img
+                src="imagens/logo-igesc.png"
+                alt="Instituto de Geografia, Geociências e Saúde Coletiva"
+                class="logo-igesc"
+              />
+            </div>
+          </div>
+
+          <div class="affiliation-group affiliation-funding">
+            <span>Agências de fomento</span>
+            <div class="affiliation-logos">
+              <img src="imagens/cnpq-logo.png" alt="CNPq" class="logo-cnpq" />
+              <img
+                src="imagens/fapemig.png"
+                alt="FAPEMIG"
+                class="logo-fapemig"
+              />
+            </div>
+          </div>
+
+          <div class="affiliation-group affiliation-partners">
+            <span>Instituições parceiras</span>
+            <div class="affiliation-logos">
+              <img
+                src="imagens/minho.png"
+                alt="Universidade do Minho"
+                class="logo-minho"
+              />
+              <img
+                src="imagens/ufpr.png"
+                alt="Universidade Federal do Paraná"
+                class="logo-ufpr"
+              />
+              <img
+                src="imagens/barcelona.png"
+                alt="Universitat de Barcelona"
+                class="logo-barcelona"
+              />
+              <img
+                src="imagens/bombeiros.png"
+                alt="Corpo de Bombeiros Militar de Minas Gerais"
+                class="logo-bombeiros"
+              />
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="intro-strip">
+        <div class="container intro-grid">
+          <div class="intro-institution">
             <div>
-                <p class="section-label">Onde estamos</p>
-                <h2>Localização</h2>
+              <strong>Universidade Federal de Uberlândia</strong>
+              <span>Instituto de Geografia, Geociências e Saúde Coletiva</span>
             </div>
+          </div>
+          <div>
+            <strong>Áreas de atuação</strong>
+            <span
+              >Geoinformação, Geografia Física, Análise Territorial, Conservação
+              e Saúde Ambiental</span
+            >
+          </div>
+          <div>
+            <strong>Diretório dos Grupos de Pesquisa</strong>
+            <span> Grupo cadastrado no DGP/CNPq </span>
 
-            <p>
-                O GISTEC está sediado no Instituto de Geografia,
-                Geociências e Saúde Coletiva da Universidade Federal
-                de Uberlândia, no Campus Santa Mônica.
-            </p>
+            <a
+              class="intro-link"
+              href="http://dgp.cnpq.br/dgp/espelhogrupo/336652"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Consultar cadastro →
+            </a>
+          </div>
         </div>
+      </section>
 
-        <div class="location-grid">
-            <div
-                id="locationMap"
-                aria-label="Mapa de localização do GISTEC"
-                style="width: 100%; min-height: 480px;"
-            ></div>
+      <section class="section" id="projetos">
+        <div class="container">
+          <div class="section-heading">
+            <div>
+              <p class="section-label">Pesquisa</p>
+              <h2>Projetos</h2>
+            </div>
+            <p>
+              Projetos de pesquisa, extensão, inovação e formação desenvolvidos
+              pelo grupo.
+            </p>
+          </div>
 
-            <div class="location-information">
-                <span class="location-label">
-                    Sede do grupo
-                </span>
+          <div class="featured-projects">
+            <!-- Projeto CNPq -->
+
+            <a
+              class="featured-project"
+              href="paginas/cnpq-fogo.html"
+              aria-label="Conhecer o Projeto CNPq Fogo"
+            >
+              <div class="featured-project-image">
+                <img
+                  src="imagens/cnpq-fogo-nbr-rgb-wide.png"
+                  alt="Paisagem atingida por incêndio no Cerrado Mineiro"
+                />
+
+                <span class="featured-project-badge"> CNPq </span>
+              </div>
+
+              <div class="featured-project-content">
+                <span class="featured-project-number"> 01 </span>
 
                 <h3>
-                    Instituto de Geografia, Geociências e Saúde Coletiva
+                  As causas e as consequências da recorrência de incêndios e
+                  queimadas no Cerrado Mineiro
                 </h3>
 
                 <p>
-                    Universidade Federal de Uberlândia
+                  Investigação das relações entre incêndios, queimadas,
+                  recorrência do fogo e práticas agrícolas na região do 2º
+                  Comando Operacional de Bombeiros.
                 </p>
 
-                <address>
-                    Campus Santa Mônica — Bloco 1H<br>
-                    Av. João Naves de Ávila, 2121<br>
-                    Bairro Santa Mônica<br>
-                    Uberlândia — Minas Gerais
-                </address>
+                <span class="featured-project-link"> Conhecer projeto → </span>
+              </div>
+            </a>
 
-                <a
-                    class="location-link"href="https://www.openstreetmap.org/?mlat=-18.91768&mlon=-48.25580#map=18/-18.91768/-48.25580"
-                    href="https://www.openstreetmap.org/?mlat=-18.9181&mlon=-48.2580#map=18/-18.9181/-48.2580"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                >
-                    Abrir no OpenStreetMap →
-                </a>
-            </div>
+            <!-- Projeto FAPEMIG -->
+
+            <a
+              class="featured-project"
+              href="paginas/fapemig-fogo.html"
+              aria-label="Conhecer o Projeto FAPEMIG Fogo"
+            >
+              <div class="featured-project-image">
+                <img
+                  src="imagens/canastra.JPG"
+                  alt="Paisagem do Parque Nacional da Serra da Canastra"
+                />
+
+                <span class="featured-project-badge"> FAPEMIG </span>
+              </div>
+
+              <div class="featured-project-content">
+                <span class="featured-project-number"> 02 </span>
+
+                <h3>
+                  Incêndios e Manejo Integrado do Fogo no Parque Nacional da
+                  Serra da Canastra
+                </h3>
+
+                <p>
+                  Pesquisa sobre regimes de fogo, ocorrências de incêndios e
+                  estratégias de manejo integrado no Parque Nacional da Serra da
+                  Canastra.
+                </p>
+
+                <span class="featured-project-link"> Conhecer projeto → </span>
+              </div>
+            </a>
+          </div>
         </div>
-    </div>
-</section>
+      </section>
 
-        <section class="section" id="dados">
-            <div class="container">
-                <div class="section-heading">
-                    <div>
-                        <p class="section-label">Ciência aberta</p>
-                        <h2>Dados</h2>
-                    </div>
-                    <p>
-                        Bases geoespaciais, metadados, documentação,
-                        scripts e arquivos para download.
-                    </p>
-                </div>
-
-                <div class="empty-state">
-                    <strong>Nenhum conjunto de dados publicado ainda.</strong>
-                    <p>
-                        Esta seção poderá receber GeoPackage, GeoJSON, CSV,
-                        serviços OGC e dicionários de dados.
-                    </p>
-                </div>
-            </div>
-        </section>
-
-        <section class="section section-soft" id="publicacoes">
-            <div class="container">
-                <div class="section-heading">
-                    <div>
-                        <p class="section-label">Produção científica</p>
-                        <h2>Publicações</h2>
-                    </div>
-                    <p>
-                        Artigos, livros, capítulos, relatórios técnicos
-                        e demais produtos acadêmicos.
-                    </p>
-                </div>
-
-                <div class="empty-state">
-                    <strong>Publicações serão adicionadas posteriormente.</strong>
-                    <p>
-                        A estrutura está pronta para referências, DOI,
-                        resumos e links externos.
-                    </p>
-                </div>
-            </div>
-        </section>
-
-<section class="section course-section" id="cursos">
-    <div class="container">
-        <div class="section-heading course-section-heading">
+      <section class="section section-soft" id="localizacao">
+        <div class="container">
+          <div class="section-heading">
             <div>
-                <p class="section-label">Ensino e extensão</p>
-                <h2>Cursos</h2>
+              <p class="section-label">Onde estamos</p>
+              <h2>Localização</h2>
             </div>
 
             <p>
-                Formação interdisciplinar em geoinformação, análise
-                espacial, ambiente e saúde pública.
+              O GISTEC está sediado no Instituto de Geografia, Geociências e
+              Saúde Coletiva da Universidade Federal de Uberlândia, no Campus
+              Santa Mônica.
             </p>
+          </div>
+
+          <div class="location-grid">
+            <div
+              id="locationMap"
+              aria-label="Mapa de localização do GISTEC"
+              style="width: 100%; min-height: 480px"
+            ></div>
+
+            <div class="location-information">
+              <span class="location-label"> Sede do grupo </span>
+
+              <h3>Instituto de Geografia, Geociências e Saúde Coletiva</h3>
+
+              <p>Universidade Federal de Uberlândia</p>
+
+              <address>
+                Campus Santa Mônica — Bloco 1H<br />
+                Av. João Naves de Ávila, 2121<br />
+                Bairro Santa Mônica<br />
+                Uberlândia — Minas Gerais
+              </address>
+
+              <a
+                class="location-link"
+                href="https://www.openstreetmap.org/?mlat=-18.91768&mlon=-48.25580#map=18/-18.91768/-48.25580"
+                href="https://www.openstreetmap.org/?mlat=-18.9181&mlon=-48.2580#map=18/-18.9181/-48.2580"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Abrir no OpenStreetMap →
+              </a>
+            </div>
+          </div>
         </div>
+      </section>
 
-        <article class="course-feature">
+      <section class="section" id="dados">
+        <div class="container">
+          <div class="section-heading">
+            <div>
+              <p class="section-label">Ciência aberta</p>
+              <h2>Dados</h2>
+            </div>
+            <p>
+              Bases geoespaciais, metadados, documentação, scripts e arquivos
+              para download.
+            </p>
+          </div>
+
+          <div class="empty-state">
+            <strong>Nenhum conjunto de dados publicado ainda.</strong>
+            <p>
+              Esta seção poderá receber GeoPackage, GeoJSON, CSV, serviços OGC e
+              dicionários de dados.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section class="section section-soft" id="publicacoes">
+        <div class="container">
+          <div class="section-heading">
+            <div>
+              <p class="section-label">Produção científica</p>
+              <h2>Publicações</h2>
+            </div>
+            <p>
+              Artigos, livros, capítulos, relatórios técnicos e demais produtos
+              acadêmicos.
+            </p>
+          </div>
+
+          <div class="empty-state">
+            <strong>Publicações serão adicionadas posteriormente.</strong>
+            <p>
+              A estrutura está pronta para referências, DOI, resumos e links
+              externos.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section class="section course-section" id="cursos">
+        <div class="container">
+          <div class="section-heading course-section-heading">
+            <div>
+              <p class="section-label">Ensino e extensão</p>
+              <h2>Cursos</h2>
+            </div>
+
+            <p>
+              Formação interdisciplinar em geoinformação, análise espacial,
+              ambiente e saúde pública.
+            </p>
+          </div>
+
+          <article class="course-feature">
             <div class="course-feature-main">
-                <div class="course-partnership" aria-label="Parceria GAS e GISTEC">
-                    <span>GAS</span>
-                    <small>×</small>
-                    <span>GISTEC</span>
-                </div>
+              <div
+                class="course-partnership"
+                aria-label="Parceria GAS e GISTEC"
+              >
+                <span>GAS</span>
+                <small>×</small>
+                <span>GISTEC</span>
+              </div>
 
-                <span class="course-status">Inscrições abertas</span>
+              <span class="course-status">Inscrições abertas</span>
 
-                <p class="course-edition">I Curso de Geoinformação e Saúde Pública</p>
+              <p class="course-edition">
+                I Curso de Geoinformação e Saúde Pública
+              </p>
 
-                <h3>Modelagem Espacial de Arboviroses</h3>
+              <h3>Modelagem Espacial de Arboviroses</h3>
 
-                <p class="course-summary">
-                    Aplicações de geotecnologias e análise espacial
-                    voltadas à vigilância e ao controle das arboviroses.
-                </p>
+              <p class="course-summary">
+                Aplicações de geotecnologias e análise espacial voltadas à
+                vigilância e ao controle das arboviroses.
+              </p>
             </div>
 
             <div class="course-feature-details">
-                <div class="course-information-grid">
-                    <div>
-                        <span>Inscrições</span>
-                        <strong>01 a 20 de agosto de 2026</strong>
-                    </div>
-
-                    <div>
-                        <span>Datas do curso</span>
-                        <strong>12 e 19 de setembro de 2026</strong>
-                    </div>
-
-                    <div>
-                        <span>Modalidade</span>
-                        <strong>Presencial</strong>
-                    </div>
-
-                    <div>
-                        <span>Vagas</span>
-                        <strong>20 participantes</strong>
-                    </div>
+              <div class="course-information-grid">
+                <div>
+                  <span>Inscrições</span>
+                  <strong>01 a 20 de agosto de 2026</strong>
                 </div>
 
-                <div class="course-location">
-                    <span>Local</span>
-                    <strong>Laboratório de Ensino de Geoinformação — LAEG</strong>
-                    <p>Instituto de Geografia, Geociências e Saúde Coletiva — UFU</p>
+                <div>
+                  <span>Datas do curso</span>
+                  <strong>12 e 19 de setembro de 2026</strong>
                 </div>
 
-                <p class="course-audience">
-                    Curso destinado a estudantes, pesquisadores e
-                    profissionais da área da saúde interessados no uso
-                    de geoinformação aplicada à vigilância epidemiológica.
+                <div>
+                  <span>Modalidade</span>
+                  <strong>Presencial</strong>
+                </div>
+
+                <div>
+                  <span>Vagas</span>
+                  <strong>20 participantes</strong>
+                </div>
+              </div>
+
+              <div class="course-location">
+                <span>Local</span>
+                <strong>Laboratório de Ensino de Geoinformação — LAEG</strong>
+                <p>
+                  Instituto de Geografia, Geociências e Saúde Coletiva — UFU
                 </p>
+              </div>
 
-                <a
-                    class="course-button"
-                    href="https://docs.google.com/forms/d/e/1FAIpQLSedpWMU9PIPGcnrQXO6_Y3kAyukVvPTGDujJ4OkKngkDAW2gQ/viewform"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                >
-                    Fazer inscrição →
-                </a>
+              <p class="course-audience">
+                Curso destinado a estudantes, pesquisadores e profissionais da
+                área da saúde interessados no uso de geoinformação aplicada à
+                vigilância epidemiológica.
+              </p>
+
+              <a
+                class="course-button"
+                href="https://docs.google.com/forms/d/e/1FAIpQLSedpWMU9PIPGcnrQXO6_Y3kAyukVvPTGDujJ4OkKngkDAW2gQ/viewform"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Fazer inscrição →
+              </a>
             </div>
-        </article>
-    </div>
-</section>
-
+          </article>
+        </div>
+      </section>
     </main>
 
     <footer class="site-footer">
-        <div class="container footer-grid">
-            <div class="footer-brand">
-                <img src="imagens/logo.png" alt="Logo GISTEC">
-                <div>
-                    <strong>GISTEC</strong>
-                    <span>Geoinformação, Território e Conservação</span>
-                </div>
-            </div>
-
-            <div>
-                <strong>Instituição</strong>
-                <p>Universidade Federal de Uberlândia</p>
-                <p>Instituto de Geografia, Geociências e Saúde Coletiva</p>
-            </div>
-
-            <div>
-                <strong>Portal</strong>
-                <p>Versão em desenvolvimento</p>
-                <p id="currentYear"></p>
-            </div>
+      <div class="container footer-grid">
+        <div class="footer-brand">
+          <img src="imagens/logo.png" alt="Logo GISTEC" />
+          <div>
+            <strong>GISTEC</strong>
+            <span>Geoinformação, Território e Conservação</span>
+          </div>
         </div>
+
+        <div>
+          <strong>Instituição</strong>
+          <p>Universidade Federal de Uberlândia</p>
+          <p>Instituto de Geografia, Geociências e Saúde Coletiva</p>
+        </div>
+
+        <div>
+          <strong>Portal</strong>
+          <p>Versão em desenvolvimento</p>
+          <p id="currentYear"></p>
+        </div>
+      </div>
     </footer>
 
     <script src="js/main.js"></script>
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 
-<script>
-    // Centro aproximado do Campus Santa Mônica
-    const centroCampus = [
-        -18.91794, -48.25790
-    ];
+    <script>
+      // Centro aproximado do Campus Santa Mônica
+      const centroCampus = [-18.91794, -48.2579];
 
-    // Localização do Bloco 1H
-    const coordenadasIGESC = [
-        -18.91768,
-        -48.25580
-    ];
+      // Localização do Bloco 1H
+      const coordenadasIGESC = [-18.91768, -48.2558];
 
-    const locationMap = L.map(
-        'locationMap',
-        {
-            scrollWheelZoom: false,
-            zoomControl: true
-        }
-    ).setView(
-        centroCampus,
-        17
-    );
+      const locationMap = L.map("locationMap", {
+        scrollWheelZoom: false,
+        zoomControl: true,
+      }).setView(centroCampus, 17);
 
-    L.tileLayer(
-        'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
-        {
-            maxZoom: 19,
-            attribution: '&copy; OpenStreetMap contributors'
-        }
-    ).addTo(locationMap);
+      L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
+        maxZoom: 19,
+        attribution: "&copy; OpenStreetMap contributors",
+      }).addTo(locationMap);
 
-    const locationIcon = L.divIcon({
-        className: '',
+      const locationIcon = L.divIcon({
+        className: "",
         html: '<div class="location-marker"></div>',
         iconSize: [18, 18],
-        iconAnchor: [9, 9]
-    });
+        iconAnchor: [9, 9],
+      });
 
-  L.marker(
-    coordenadasIGESC,
-    {
-        icon: locationIcon
-    }
-)
-.addTo(locationMap)
-.bindPopup(
-    '<strong>GISTEC — IGESC/UFU</strong>' +
-    '<br>Campus Santa Mônica — Bloco 1H',
-    {
-        autoPan: false
-    }
-)
-.openPopup();
-</script>
-</body>
+      L.marker(coordenadasIGESC, {
+        icon: locationIcon,
+      })
+        .addTo(locationMap)
+        .bindPopup(
+          "<strong>GISTEC — IGESC/UFU</strong>" +
+            "<br>Campus Santa Mônica — Bloco 1H",
+          {
+            autoPan: false,
+          },
+        )
+        .openPopup();
+    </script>
+  </body>
 </html>
