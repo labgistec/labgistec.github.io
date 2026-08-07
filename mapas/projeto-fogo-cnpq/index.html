@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
 
     <style>
-        html, body, #map {
+        html, body {
             width: 100%;
             height: 100%;
             margin: 0;
@@ -16,40 +16,96 @@
         body {
             color: #111;
             font-family: Arial, Helvetica, sans-serif;
+            overflow: hidden;
+            background: #f7f5ef;
         }
 
-        .map-title {
-            position: absolute;
-            top: 14px;
-            right: 14px;
-            z-index: 800;
-            max-width: 290px;
-            padding: 13px 16px;
-            background: rgba(255, 255, 255, 0.94);
-            border: 1px solid #d8d8d8;
-            box-shadow: 0 5px 18px rgba(0, 0, 0, 0.08);
+        .map-shell {
+            display: grid;
+            grid-template-columns: 250px minmax(0, 1fr);
+            gap: 18px;
+            width: 100%;
+            height: 100%;
+            padding: 14px;
+            box-sizing: border-box;
         }
 
-        .map-title strong {
-            display: block;
-            margin-bottom: 3px;
-            font-size: 14px;
+        .map-sidebar {
+            align-self: stretch;
+            padding: 22px 18px;
+            overflow-y: auto;
+            background: #fffdf8;
+            border: 1px solid #d8d2c5;
+            border-radius: 6px;
+            box-sizing: border-box;
         }
 
-        .map-title span {
-            color: #555;
+        .sidebar-section + .sidebar-section {
+            margin-top: 22px;
+            padding-top: 19px;
+            border-top: 1px dashed #cfc8ba;
+        }
+
+        .sidebar-title {
+            margin: 0 0 12px;
+            color: #6a716d;
             font-size: 11px;
-            line-height: 1.4;
+            font-weight: 700;
+            letter-spacing: 0.09em;
+            text-transform: uppercase;
+        }
+
+        .layer-option {
+            display: flex;
+            align-items: flex-start;
+            gap: 9px;
+            padding: 9px 0;
+            border-bottom: 1px solid #e2ddd2;
+            font-size: 13px;
+            line-height: 1.35;
+            cursor: pointer;
+        }
+
+        .layer-option:last-child {
+            border-bottom: 0;
+        }
+
+        .layer-option input {
+            margin: 2px 0 0;
+            accent-color: #1e4d45;
+        }
+
+        .data-description {
+            margin: 0 0 14px;
+            color: #777b78;
+            font-size: 12px;
+            line-height: 1.6;
         }
 
         .download-data {
-            display: inline-block;
-            margin-top: 8px;
-            color: #111;
-            font-size: 11px;
+            display: block;
+            padding: 11px 12px;
+            color: #fff;
+            background: #244d46;
+            border-radius: 3px;
+            font-size: 12px;
             font-weight: 700;
-            text-decoration: underline;
-            text-underline-offset: 3px;
+            text-align: center;
+            text-decoration: none;
+        }
+
+        .map-area {
+            position: relative;
+            min-width: 0;
+            overflow: hidden;
+            background: #fff;
+            border: 1px solid #d8d2c5;
+            border-radius: 6px;
+        }
+
+        #map {
+            width: 100%;
+            height: 100%;
         }
 
         .map-status {
@@ -62,11 +118,6 @@
             border: 1px solid #ddd;
             font-size: 13px;
             transform: translate(-50%, -50%);
-        }
-
-        .leaflet-control-layers {
-            border-radius: 0;
-            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.12);
         }
 
         .sigla-estado {
@@ -83,28 +134,68 @@
             pointer-events: none;
         }
 
-        @media (max-width: 600px) {
-            .map-title {
-                right: 10px;
-                left: 52px;
-                max-width: none;
+        @media (max-width: 700px) {
+            body {
+                overflow: auto;
+            }
+
+            .map-shell {
+                grid-template-columns: 1fr;
+                grid-template-rows: auto 480px;
+                height: auto;
+                min-height: 100%;
             }
         }
     </style>
 </head>
 
 <body>
-    <div id="map"></div>
+    <div class="map-shell">
+        <aside class="map-sidebar" aria-label="Camadas e dados do mapa">
+            <section class="sidebar-section">
+                <h2 class="sidebar-title">Camadas</h2>
+                <label class="layer-option">
+                    <input id="overlayProjeto" type="checkbox" checked>
+                    <span>Região do 2º COB</span>
+                </label>
+                <label class="layer-option">
+                    <input id="overlayEstados" type="checkbox" checked>
+                    <span>Limites estaduais</span>
+                </label>
+            </section>
 
-    <div class="map-title">
-        <strong>Região do 2º COB</strong>
-        <span>Área de interesse do Projeto CNPq Fogo</span><br>
-        <a class="download-data" href="../../dados/regiao2cob.geojson" download>
-            Baixar GeoJSON
-        </a>
+            <section class="sidebar-section">
+                <h2 class="sidebar-title">Mapa-base</h2>
+                <label class="layer-option">
+                    <input type="radio" name="baseMap" value="osm" checked>
+                    <span>OpenStreetMap</span>
+                </label>
+                <label class="layer-option">
+                    <input type="radio" name="baseMap" value="satelite">
+                    <span>Imagem de satélite</span>
+                </label>
+                <label class="layer-option">
+                    <input type="radio" name="baseMap" value="topografico">
+                    <span>OpenTopoMap</span>
+                </label>
+            </section>
+
+            <section class="sidebar-section">
+                <h2 class="sidebar-title">Dados brutos</h2>
+                <p class="data-description">
+                    Baixe a área de interesse do Projeto CNPq Fogo em formato GeoJSON.
+                </p>
+                <a class="download-data" href="../../dados/regiao2cob.geojson" download>
+                    Baixar GeoJSON &#8599;
+                </a>
+            </section>
+        </aside>
+
+        <div class="map-area">
+            <div id="map"></div>
+            <div id="mapStatus" class="map-status">Carregando camadas...</div>
+        </div>
     </div>
-
-    <div id="mapStatus" class="map-status">Carregando camadas...</div>
 
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 
@@ -137,6 +228,24 @@
                 attribution: '&copy; OpenStreetMap contributors · OpenTopoMap (CC-BY-SA)'
             }
         );
+
+        const mapasBase = {
+            osm: openStreetMap,
+            satelite: esriSatelite,
+            topografico: openTopoMap
+        };
+
+        let mapaBaseAtual = openStreetMap;
+
+        document.querySelectorAll('input[name="baseMap"]').forEach(input => {
+            input.addEventListener('change', event => {
+                if (!event.target.checked) return;
+                map.removeLayer(mapaBaseAtual);
+                mapaBaseAtual = mapasBase[event.target.value];
+                mapaBaseAtual.addTo(map);
+                mapaBaseAtual.bringToBack();
+            });
+        });
 
         function carregarGeoJSON(caminho) {
             return fetch(caminho)
@@ -237,6 +346,23 @@
             limitesEstados.addTo(estados);
             estados.addTo(map);
 
+            document.getElementById('overlayProjeto').addEventListener('change', event => {
+                if (event.target.checked) {
+                    regiao2COB.addTo(map);
+                } else {
+                    map.removeLayer(regiao2COB);
+                }
+            });
+
+            document.getElementById('overlayEstados').addEventListener('change', event => {
+                if (event.target.checked) {
+                    estados.addTo(map);
+                    atualizarPosicaoSiglas();
+                } else {
+                    map.removeLayer(estados);
+                }
+            });
+
             function atualizarPosicaoSiglas() {
                 if (!map.getCenter()) {
                     return;
@@ -276,22 +402,6 @@
             }
 
             map.fitBounds(regiao2COB.getBounds(), { padding: [22, 22] });
-
-            L.control.layers(
-                {
-                    'Imagem de satélite — Esri': esriSatelite,
-                    'OpenStreetMap': openStreetMap,
-                    'OpenTopoMap': openTopoMap
-                },
-                {
-                    'Região do 2º COB': regiao2COB,
-                    'Estados': estados
-                },
-                {
-                    collapsed: false,
-                    position: 'bottomright'
-                }
-            ).addTo(map);
 
             L.control.scale({ imperial: false }).addTo(map);
 
