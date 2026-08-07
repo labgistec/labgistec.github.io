@@ -234,8 +234,44 @@
                 }
             });
 
+            limitesEstados.addTo(estados);
+            estados.addTo(map);
 
-                map.fitBounds(regiao2COB.getBounds(), { padding: [22, 22] });
+            function atualizarPosicaoSiglas() {
+                const limitesTela = map.getBounds();
+
+                marcadoresSiglas.forEach(item => {
+                    const limitesEstado = item.camada.getBounds();
+
+                    if (!limitesTela.intersects(limitesEstado)) {
+                        item.marcador.setOpacity(0);
+                        return;
+                    }
+
+                    const sul = Math.max(
+                        limitesTela.getSouth(),
+                        limitesEstado.getSouth()
+                    );
+                    const norte = Math.min(
+                        limitesTela.getNorth(),
+                        limitesEstado.getNorth()
+                    );
+                    const oeste = Math.max(
+                        limitesTela.getWest(),
+                        limitesEstado.getWest()
+                    );
+                    const leste = Math.min(
+                        limitesTela.getEast(),
+                        limitesEstado.getEast()
+                    );
+
+                    item.marcador
+                        .setLatLng([(sul + norte) / 2, (oeste + leste) / 2])
+                        .setOpacity(1);
+                });
+            }
+
+            map.fitBounds(regiao2COB.getBounds(), { padding: [22, 22] });
 
             L.control.layers(
                 {
@@ -255,8 +291,8 @@
 
             L.control.scale({ imperial: false }).addTo(map);
 
-            map.on('moveend zoomend resize', atualizarPosicaoSiglas);
-            atualizarPosicaoSiglas();
+            map.on('moveend zoomend resize overlayadd', atualizarPosicaoSiglas);
+            map.whenReady(atualizarPosicaoSiglas);
 
             document.getElementById('mapStatus').remove();
         })
