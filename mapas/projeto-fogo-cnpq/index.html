@@ -238,12 +238,16 @@
             estados.addTo(map);
 
             function atualizarPosicaoSiglas() {
+                if (!map.getCenter()) {
+                    return;
+                }
+
                 const limitesTela = map.getBounds();
 
                 marcadoresSiglas.forEach(item => {
                     const limitesEstado = item.camada.getBounds();
 
-                    if (!limitesTela.intersects(limitesEstado)) {
+                    if (!limitesEstado.isValid() || !limitesTela.intersects(limitesEstado)) {
                         item.marcador.setOpacity(0);
                         return;
                     }
