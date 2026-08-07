@@ -120,20 +120,6 @@
             transform: translate(-50%, -50%);
         }
 
-        .sigla-estado {
-            color: #fff;
-            font-size: 12px;
-            font-weight: 700;
-            line-height: 20px;
-            text-align: center;
-            text-shadow:
-                -1px -1px 2px #000,
-                 1px -1px 2px #000,
-                -1px  1px 2px #000,
-                 1px  1px 2px #000;
-            pointer-events: none;
-        }
-
         @media (max-width: 700px) {
             body {
                 overflow: auto;
@@ -157,10 +143,6 @@
                 <label class="layer-option">
                     <input id="overlayProjeto" type="checkbox" checked>
                     <span>Região do 2º COB</span>
-                </label>
-                <label class="layer-option">
-                    <input id="overlayEstados" type="checkbox" checked>
-                    <span>Limites estaduais</span>
                 </label>
             </section>
 
@@ -278,18 +260,14 @@
                 });
         }
 
-        Promise.all([
-            carregarGeoJSON('../../dados/regiao2cob.geojson'),
-            carregarGeoJSON('../../dados/limites_estados.geojsonl')
-        ])
-        .then(([dados2COB, dadosEstados]) => {
+        carregarGeoJSON('../../dados/regiao2cob.geojson')
+        .then(dados2COB => {
             const regiao2COB = L.geoJSON(dados2COB, {
                 style: {
                     color: '#ff0000',
                     weight: 3,
                     opacity: 1,
-                    fillColor: '#ff0000',
-                    fillOpacity: 0.08
+                    fill: false
                 },
                 onEachFeature: (feature, layer) => {
                     const area = feature.properties && feature.properties.Area_Km2
@@ -309,43 +287,6 @@
                 }
             }).addTo(map);
 
-            const estados = L.layerGroup();
-            const marcadoresSiglas = [];
-
-            const limitesEstados = L.geoJSON(dadosEstados, {
-                style: {
-                    color: '#ffffff',
-                    weight: 1.5,
-                    opacity: 0.95,
-                    fill: false,
-                    fillOpacity: 0
-                },
-                onEachFeature: (feature, layer) => {
-                    const sigla = feature.properties && feature.properties.sigla
-                        ? feature.properties.sigla
-                        : '';
-
-                    if (sigla) {
-                        const marcador = L.marker([0, 0], {
-                            interactive: false,
-                            opacity: 0,
-                            icon: L.divIcon({
-                                className: 'sigla-estado',
-                                html: sigla,
-                                iconSize: [40, 20],
-                                iconAnchor: [20, 10]
-                            })
-                        });
-
-                        marcador.addTo(estados);
-                        marcadoresSiglas.push({ marcador, camada: layer });
-                    }
-                }
-            });
-
-            limitesEstados.addTo(estados);
-            estados.addTo(map);
-
             document.getElementById('overlayProjeto').addEventListener('change', event => {
                 if (event.target.checked) {
                     regiao2COB.addTo(map);
@@ -354,59 +295,9 @@
                 }
             });
 
-            document.getElementById('overlayEstados').addEventListener('change', event => {
-                if (event.target.checked) {
-                    estados.addTo(map);
-                    atualizarPosicaoSiglas();
-                } else {
-                    map.removeLayer(estados);
-                }
-            });
-
-            function atualizarPosicaoSiglas() {
-                if (!map.getCenter()) {
-                    return;
-                }
-
-                const limitesTela = map.getBounds();
-
-                marcadoresSiglas.forEach(item => {
-                    const limitesEstado = item.camada.getBounds();
-
-                    if (!limitesEstado.isValid() || !limitesTela.intersects(limitesEstado)) {
-                        item.marcador.setOpacity(0);
-                        return;
-                    }
-
-                    const sul = Math.max(
-                        limitesTela.getSouth(),
-                        limitesEstado.getSouth()
-                    );
-                    const norte = Math.min(
-                        limitesTela.getNorth(),
-                        limitesEstado.getNorth()
-                    );
-                    const oeste = Math.max(
-                        limitesTela.getWest(),
-                        limitesEstado.getWest()
-                    );
-                    const leste = Math.min(
-                        limitesTela.getEast(),
-                        limitesEstado.getEast()
-                    );
-
-                    item.marcador
-                        .setLatLng([(sul + norte) / 2, (oeste + leste) / 2])
-                        .setOpacity(1);
-                });
-            }
-
             map.fitBounds(regiao2COB.getBounds(), { padding: [22, 22] });
 
             L.control.scale({ imperial: false }).addTo(map);
-
-            map.on('moveend zoomend resize overlayadd', atualizarPosicaoSiglas);
-            map.whenReady(atualizarPosicaoSiglas);
 
             document.getElementById('mapStatus').remove();
         })

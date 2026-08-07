@@ -130,21 +130,6 @@
             height: 100%;
         }
 
-        /* Siglas dos estados */
-        .sigla-estado {
-            color: #ffffff;
-            font-size: 12px;
-            font-weight: 700;
-            line-height: 20px;
-            text-align: center;
-            text-shadow:
-                -1px -1px 2px #000,
-                 1px -1px 2px #000,
-                -1px  1px 2px #000,
-                 1px  1px 2px #000;
-            pointer-events: none;
-        }
-
         @media (max-width: 700px) {
             body {
                 overflow: auto;
@@ -168,10 +153,6 @@
                 <label class="layer-option">
                     <input id="overlayProjeto" type="checkbox" checked>
                     <span>Parque Nacional da Serra da Canastra</span>
-                </label>
-                <label class="layer-option">
-                    <input id="overlayEstados" type="checkbox" checked>
-                    <span>Limites estaduais</span>
                 </label>
             </section>
 
@@ -313,12 +294,8 @@
                 });
         }
 
-        Promise.all([
-            carregarGeoJSON('../../dados/canastra.geojson'),
-            carregarGeoJSON('../../dados/limites_estados.geojsonl')
-        ])
-
-        .then(([dadosCanastra, dadosEstados]) => {
+        carregarGeoJSON('../../dados/canastra.geojson')
+        .then(dadosCanastra => {
             /* Área da Canastra */
 
             const canastra = L.geoJSON(dadosCanastra, {
@@ -326,8 +303,7 @@
                     color: '#ff0000',
                     weight: 2,
                     opacity: 1,
-                    fillColor: '#d86b3d',
-                    fillOpacity: 0.16
+                    fill: false
                 },
 
                 onEachFeature: (feature, layer) => {
@@ -338,46 +314,6 @@
                 }
             }).addTo(map);
 
-            /* Grupo que reúne limites e siglas estaduais */
-            const estados = L.layerGroup();
-            const marcadoresSiglas = [];
-
-            const limitesEstados = L.geoJSON(dadosEstados, {
-                style: {
-                    color: '#ffffff',
-                    weight: 1.5,
-                    opacity: 0.95,
-                    fill: false,
-                    fillOpacity: 0
-                },
-                onEachFeature: (feature, layer) => {
-                    const sigla = feature.properties && feature.properties.sigla
-                        ? feature.properties.sigla
-                        : '';
-
-                    if (!sigla) {
-                        return;
-                    }
-
-                    const marcador = L.marker([0, 0], {
-                        interactive: false,
-                        opacity: 0,
-                        icon: L.divIcon({
-                            className: 'sigla-estado',
-                            html: sigla,
-                            iconSize: [40, 20],
-                            iconAnchor: [20, 10]
-                        })
-                    });
-
-                    marcador.addTo(estados);
-                    marcadoresSiglas.push({ marcador, camada: layer });
-                }
-            });
-
-            limitesEstados.addTo(estados);
-            estados.addTo(map);
-
             document.getElementById('overlayProjeto').addEventListener('change', event => {
                 if (event.target.checked) {
                     canastra.addTo(map);
@@ -385,41 +321,6 @@
                     map.removeLayer(canastra);
                 }
             });
-
-            document.getElementById('overlayEstados').addEventListener('change', event => {
-                if (event.target.checked) {
-                    estados.addTo(map);
-                    atualizarPosicaoSiglas();
-                } else {
-                    map.removeLayer(estados);
-                }
-            });
-
-            function atualizarPosicaoSiglas() {
-                if (!map.getCenter()) {
-                    return;
-                }
-
-                const limitesTela = map.getBounds();
-
-                marcadoresSiglas.forEach(item => {
-                    const limitesEstado = item.camada.getBounds();
-
-                    if (!limitesEstado.isValid() || !limitesTela.intersects(limitesEstado)) {
-                        item.marcador.setOpacity(0);
-                        return;
-                    }
-
-                    const sul = Math.max(limitesTela.getSouth(), limitesEstado.getSouth());
-                    const norte = Math.min(limitesTela.getNorth(), limitesEstado.getNorth());
-                    const oeste = Math.max(limitesTela.getWest(), limitesEstado.getWest());
-                    const leste = Math.min(limitesTela.getEast(), limitesEstado.getEast());
-
-                    item.marcador
-                        .setLatLng([(sul + norte) / 2, (oeste + leste) / 2])
-                        .setOpacity(1);
-                });
-            }
 
             /* Enquadramento da Canastra */
 
@@ -429,12 +330,6 @@
                     padding: [22, 22]
                 }
             );
-
-            map.on(
-                'moveend zoomend resize overlayadd',
-                atualizarPosicaoSiglas
-            );
-            map.whenReady(atualizarPosicaoSiglas);
 
             /* Escala gráfica */
 
