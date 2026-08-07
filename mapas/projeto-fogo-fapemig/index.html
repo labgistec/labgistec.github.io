@@ -242,124 +242,71 @@
                 }
             }).addTo(map);
 
-          /* Grupo que reunirá limites e siglas */
+            /* Grupo que reúne limites e siglas estaduais */
+            const estados = L.layerGroup();
+            const marcadoresSiglas = [];
 
-const estados = L.layerGroup();
-const marcadoresSiglas = [];
+            const limitesEstados = L.geoJSON(dadosEstados, {
+                style: {
+                    color: '#ffffff',
+                    weight: 1.5,
+                    opacity: 0.95,
+                    fill: false,
+                    fillOpacity: 0
+                },
+                onEachFeature: (feature, layer) => {
+                    const sigla = feature.properties && feature.properties.sigla
+                        ? feature.properties.sigla
+                        : '';
 
-/* Limites estaduais */
+                    if (!sigla) {
+                        return;
+                    }
 
-const limitesEstados = L.geoJSON(dadosEstados, {
-    style: {
-        color: '#ffffff',
-        weight: 1.5,
-        opacity: 0.95,
-        fill: false,
-        fillOpacity: 0
-    },
+                    const marcador = L.marker([0, 0], {
+                        interactive: false,
+                        opacity: 0,
+                        icon: L.divIcon({
+                            className: 'sigla-estado',
+                            html: sigla,
+                            iconSize: [40, 20],
+                            iconAnchor: [20, 10]
+                        })
+                    });
 
-    onEachFeature: (feature, layer) => {
-        const sigla =
-            feature.properties &&
-            feature.properties.sigla
-                ? feature.properties.sigla
-                : '';
-
-        if (sigla) {
-            const marcadorSigla = L.marker(
-                [0, 0],
-                {
-                    interactive: false,
-                    opacity: 0,
-
-                    icon: L.divIcon({
-                        className: 'sigla-estado',
-                        html: sigla,
-                        iconSize: [40, 20],
-                        iconAnchor: [20, 10]
-                    })
+                    marcador.addTo(estados);
+                    marcadoresSiglas.push({ marcador, camada: layer });
                 }
-            );
-
-            marcadorSigla.addTo(estados);
-
-            marcadoresSiglas.push({
-                marcador: marcadorSigla,
-                camada: layer
             });
-        }
-    }
-});
 
-limitesEstados.addTo(estados);
-estados.addTo(map);
+            limitesEstados.addTo(estados);
+            estados.addTo(map);
 
-/*
- * Reposiciona cada sigla no centro da parte
- * do estado que está visível na tela.
- */
+            function atualizarPosicaoSiglas() {
+                if (!map.getCenter()) {
+                    return;
+                }
 
-function atualizarPosicaoSiglas() {
-    const limitesTela = map.getBounds();
+                const limitesTela = map.getBounds();
 
-    marcadoresSiglas.forEach(item => {
-        const limitesEstado =
-            item.camada.getBounds();
+                marcadoresSiglas.forEach(item => {
+                    const limitesEstado = item.camada.getBounds();
 
-        /*
-         * Esconde a sigla quando nenhuma parte
-         * do estado estiver visível.
-         */
-        if (!limitesTela.intersects(limitesEstado)) {
-            item.marcador.setOpacity(0);
-            return;
-        }
+                    if (!limitesEstado.isValid() || !limitesTela.intersects(limitesEstado)) {
+                        item.marcador.setOpacity(0);
+                        return;
+                    }
 
-        /*
-         * Calcula a interseção entre os limites
-         * do estado e a área atualmente visível.
-         */
-        const sul = Math.max(
-            limitesTela.getSouth(),
-            limitesEstado.getSouth()
-        );
+                    const sul = Math.max(limitesTela.getSouth(), limitesEstado.getSouth());
+                    const norte = Math.min(limitesTela.getNorth(), limitesEstado.getNorth());
+                    const oeste = Math.max(limitesTela.getWest(), limitesEstado.getWest());
+                    const leste = Math.min(limitesTela.getEast(), limitesEstado.getEast());
 
-        const norte = Math.min(
-            limitesTela.getNorth(),
-            limitesEstado.getNorth()
-        );
-
-        const oeste = Math.max(
-            limitesTela.getWest(),
-            limitesEstado.getWest()
-        );
-
-        const leste = Math.min(
-            limitesTela.getEast(),
-            limitesEstado.getEast()
-        );
-
-        const latitude = (sul + norte) / 2;
-        const longitude = (oeste + leste) / 2;
-
-        item.marcador
-            .setLatLng([latitude, longitude])
-            .setOpacity(1);
-    });
-}
-
-/*
- * Atualiza as siglas sempre que o usuário
- * movimentar, ampliar ou redimensionar o mapa.
- */
-map.on(
-    'moveend zoomend resize',
-    atualizarPosicaoSiglas
-);
-
-map.whenReady(() => {
-    atualizarPosicaoSiglas();
-});
+                    item.marcador
+                        .setLatLng([(sul + norte) / 2, (oeste + leste) / 2])
+                        .setOpacity(1);
+                });
+            }
 
             /* Enquadramento da Canastra */
 
@@ -369,6 +316,12 @@ map.whenReady(() => {
                     padding: [22, 22]
                 }
             );
+
+            map.on(
+                'moveend zoomend resize overlayadd',
+                atualizarPosicaoSiglas
+            );
+            map.whenReady(atualizarPosicaoSiglas);
 
             /* Controle de camadas */
 
